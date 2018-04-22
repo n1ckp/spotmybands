@@ -9,5 +9,8 @@
 <body>
   <div id="app-root">Please enable Javascript</div>
   <script src="/static/built/main-app.chunk.js"></script>
+  <script type="text/javascript">
+  var appData = {{ appData | safe }}
+  </script>
 </body>
 </html>
