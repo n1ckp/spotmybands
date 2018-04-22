@@ -1,7 +1,7 @@
 {
   "name": "spotmybands",
   "version": "1.0.0",
-  "description": "",
+  "description": "The place for quickly spotting events for the bands you listen to",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
