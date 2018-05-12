@@ -1,0 +1,8 @@
+@import '../base';
+
+#container {
+  margin-top: 24px;
+  h1 {
+    @include font-header;
+  }
+}

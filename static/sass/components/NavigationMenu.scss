@@ -1,0 +1,16 @@
+@import '../base';
+
+#container {
+  height: calc(100vh - 4px);
+  .inner {
+    display: flex;
+    .gutter {
+      padding: 24px;
+      .logo {
+        ellipse, rect, path:last-child {
+          fill: $colour-purple;
+        }
+      }
+    }
+  }
+}

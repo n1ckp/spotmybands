@@ -1,0 +1,20 @@
+@import 'mixins/colours';
+@import 'mixins/typography';
+
+html, body {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  border-top: solid 4px $colour-purple;
+}
+
+h1, h2, h3, h4, h5 {
+  margin: 0;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: Lato, sans-serif;
+}

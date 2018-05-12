@@ -1,0 +1,9 @@
+@mixin font-normal($weight: normal) {
+  font-size: 16px;
+  font-weight: $weight;
+}
+
+@mixin font-header($weight: normal) {
+  font-size: 24px;
+  font-weight: $weight;
+}

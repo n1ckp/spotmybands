@@ -37,7 +37,7 @@ else {
 
   Object.keys(entry).map(function(appName) {
     entry[appName] = [
-      'webpack-dev-server/client?http://localhost:3010/',
+      'webpack-dev-server/client?http://localhost:3000/',
       'webpack/hot/only-dev-server',
       'babel-polyfill',
       entry[appName],
@@ -87,7 +87,12 @@ module.exports = {
         ]
       },
       {
-        test: /\.(png|gif|jpg|svg|ttf|woff|eot)/,
+        test: /\.svg/,
+        include: path.join(__dirname, 'static/images'),
+        loader: 'react-svg-loader'
+      },
+      {
+        test: /\.(png|gif|jpg|ttf|woff|eot)/,
         include: path.join(__dirname, 'static/images'),
         loader: 'url-loader'
       },

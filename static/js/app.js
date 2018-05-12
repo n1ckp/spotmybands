@@ -7,8 +7,6 @@ import configureStore from 'redux/store'
 
 import SpotMyBandsAppContainer from 'components/container/apps/SpotMyBandsAppContainer'
 
-console.log('hmm')
-
 const renderApp = () => {
   render((
     <Provider store={configureStore()}>
