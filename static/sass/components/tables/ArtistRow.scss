@@ -1,0 +1,32 @@
+@import '../../base';
+
+#container {
+  display: flex;
+  align-items: center;
+  padding: 8px 0;
+  background: white;
+  .icon {
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+    border-radius: 20px;
+    margin-right: 16px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    box-shadow: 1px 4px 4px 0 $colour-light-grey;
+  }
+  .info {
+    display: flex;
+    flex-direction: column;
+    h2 {
+      @include font-header-2;
+    }
+    p {
+      @include font-normal;
+      span {
+        font-weight: bold;
+      }
+    }
+  }
+}

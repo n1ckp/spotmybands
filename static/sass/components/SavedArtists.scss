@@ -4,5 +4,15 @@
   margin-top: 24px;
   h1 {
     @include font-header;
+    margin-bottom: 24px;
+  }
+  .actions {
+    display: flex; 
+  }
+  .artistsContainer {
+    max-width: 572px;
+    width: 100%;
+    height: calc(100vh - 156px);
+    background-color: $colour-light-grey;
   }
 }

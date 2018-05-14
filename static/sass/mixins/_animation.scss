@@ -1,0 +1,6 @@
+@mixin base-transition($duration, $type:ease-in-out) {
+  -webkit-transition: $duration $type;
+  -moz-transition: $duration $type;
+  -o-transition: $duration $type;
+  transition: $duration $type;
+}
