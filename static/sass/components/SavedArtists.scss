@@ -7,12 +7,13 @@
     margin-bottom: 24px;
   }
   .actions {
-    display: flex; 
+    display: flex;
+    margin-bottom: 24px;
   }
   .artistsContainer {
-    max-width: 572px;
     width: 100%;
     height: calc(100vh - 156px);
-    background-color: $colour-light-grey;
+    background-color: $colour-lighter-grey;
+    border: solid 1px $colour-light-grey;
   }
 }

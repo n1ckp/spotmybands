@@ -1,3 +1,15 @@
+@mixin font-small-2($weight: normal) {
+  font-size: 12px;
+  font-weight: $weight;
+  color: $colour-text-primary;
+}
+
+@mixin font-small-1($weight: normal) {
+  font-size: 14px;
+  font-weight: $weight;
+  color: $colour-text-primary;
+}
+
 @mixin font-normal($weight: normal) {
   font-size: 16px;
   font-weight: $weight;

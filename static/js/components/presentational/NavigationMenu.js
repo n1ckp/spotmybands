@@ -4,6 +4,8 @@ import SavedArtistsContainer from 'components/container/SavedArtistsContainer'
 import InfoPanel from 'components/presentational/InfoPanel'
 
 import LogoImage from 'logo.svg';
+import ArtistsImage from 'icons/nav/list-items.svg';
+import InfoImage from 'icons/nav/info.svg';
 
 import styles from 'components/NavigationMenu.scss'
 
@@ -15,6 +17,20 @@ export default class NavigationMenu extends React.Component {
       panelOpen: true,
       selected: 'artists',
     }
+  }
+
+  renderNavOptions() {
+    let options = ['artists', 'info']
+    return (
+      <div className={styles.navOptions}>
+        <div className={this.state.selected === 'artists' ? styles.selected : null} onClick={() => this.setState({selected: 'artists'})}>
+          <ArtistsImage />
+        </div>
+        <div className={this.state.selected === 'info' ? styles.selected : null} onClick={() => this.setState({selected: 'info'})}>
+          <InfoImage />
+        </div>
+      </div>
+    )
   }
 
   renderPanel() {
@@ -45,6 +61,7 @@ export default class NavigationMenu extends React.Component {
         <div className={styles.inner}>
           <div className={styles.gutter}>
             <LogoImage width={40} height={49} className={styles.logo} />
+            {this.renderNavOptions()}
           </div>
           {this.renderPanel()}
         </div>
