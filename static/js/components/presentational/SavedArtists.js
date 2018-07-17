@@ -26,7 +26,7 @@ export default class SavedArtists extends React.Component {
   renderArtistTable() {
     return (
       <div className={styles.artistsContainer}>
-        {this.props.artists.map((artist, index) => {
+        {Object.values(this.props.artists).map((artist, index) => {
           return <ArtistRow key={index} artist={artist} />
         })}
       </div>

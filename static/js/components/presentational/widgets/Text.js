@@ -11,6 +11,10 @@ export default class Text extends React.Component {
     }
   }
 
+  handleClick() {
+    this.inputEl.focus()
+  }
+
   onChange(value) {
     this.setState({value})
     if (this.props.onChange) {
@@ -57,14 +61,15 @@ export default class Text extends React.Component {
     }
 
     return(
-      <div id={styles.container} className={classNames.join(' ')}>
+      <div id={styles.container} className={classNames.join(' ')} onClick={() => this.handleClick()}>
         {this.renderIcon()}
         <input
           value={this.props.value}
           placeholder={this.props.placeholder}
-          onChange={newValue => this.onChange(newValue)}
+          onChange={e => this.onChange(e.target.value)}
           onFocus={() => this.onFocus()}
-          onBlur={() => this.onBlur()} />
+          onBlur={() => this.onBlur()}
+          ref={el => this.inputEl = el} />
       </div>
     )
   }

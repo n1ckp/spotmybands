@@ -10,7 +10,7 @@ if (window.__REDUX_DEVTOOLS_EXTENSION__) {
 }
 
 export default function configureStore(initialState) {
-  const store = createStore(combineReducers(reducers), initialState)
+  const store = createStore(combineReducers(reducers), initialState, middleware)
 
   if (module.hot) {
     // Enable Webpack hot module replacement for reducers
