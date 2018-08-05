@@ -27,5 +27,6 @@ export default class Button extends React.Component {
 Button.propTypes = {
   text: PropTypes.string,
   type: PropTypes.string,
+  className: PropTypes.string,
   onClick: PropTypes.func,
 }

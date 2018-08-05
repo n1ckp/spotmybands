@@ -1,21 +1,25 @@
 import {connect} from 'react-redux'
 
-import {spotifySearchArtists} from 'redux/actions'
+import {spotifySearchArtists, addUserArtist} from 'redux/actions'
 
 import AddArtistsModal from 'components/presentational/AddArtistsModal'
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = state => {
   return {
     loadingSpotifyArtists: state.spotify.artists.loading,
     spotifyArtists:        state.spotify.artists.list,
+    userArtists:           state.userArtists.artists,
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
-    spotifySearchArtist: (searchText) => {
+    spotifySearchArtist: searchText => {
       dispatch(spotifySearchArtists(searchText))
-    }    
+    },
+    addToUserList: artist => {
+      dispatch(addUserArtist(artist.id, artist))
+    },
   }
 }
 

@@ -34,6 +34,7 @@ export default class SavedArtists extends React.Component {
   }
 
   render() {
+    console.log(this.props.artists)
     return (
       <div id={styles.container}>
         <h1>Your Artists</h1>

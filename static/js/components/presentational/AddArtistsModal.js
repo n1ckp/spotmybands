@@ -36,15 +36,10 @@ export default class AddArtistsModal extends React.Component {
       return (
         <div className={styles.artists}>
           {this.props.spotifyArtists.map((a, index) => {
-            let artist = {
-              name: a.name,
-            }
-  
-            if (a.images && a.images.length) {
-              artist.logoURL = a.images[0].url
-            }
-  
-            return <ArtistRow key={index} artist={artist} />
+            return <ArtistRow key={index}
+              artist={a}
+              addToUserList={artist => this.props.addToUserList(artist)}
+              onUserList={this.props.userArtists[a.id] !== undefined} />
           })}
         </div>
       )

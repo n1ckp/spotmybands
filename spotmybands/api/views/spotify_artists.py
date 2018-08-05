@@ -5,6 +5,8 @@ import requests
 from django.http import Http404, HttpResponse, JsonResponse
 from django.views.generic import View
 
+from spotmybands.api.util.spotify import ArtistImporter
+
 
 class SpotifyArtistSearchView(View):
     def post(self, request):
@@ -19,6 +21,9 @@ class SpotifyArtistSearchView(View):
         url = 'https://api.spotify.com/v1/search?type=artist&q={}'.format(params['q'])
         r = requests.get(url, headers=headers)
         response_data = json.loads(r.text)
+        print(response_data)
         if not response_data.get('artists'):
             raise Http404
-        return JsonResponse({'artists': response_data['artists']['items']})
+        
+        artists = [ArtistImporter(a).process() for a in response_data['artists']['items']]
+        return JsonResponse({'artists': artists})
