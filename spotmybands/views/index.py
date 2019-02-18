@@ -27,6 +27,7 @@ def IndexView(request):
     appData = {
         'SpotifyClientID': keys['SpotifyClientID'],
         'SpotifyAccessToken': access_token,
+        'google_maps_api_key': keys['GoogleMapsAPIKey'],
     }
 
     return render(request, 'index.html', {'appData': appData})

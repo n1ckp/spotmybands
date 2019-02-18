@@ -26,8 +26,8 @@ export default class ArtistRow extends React.Component {
       return null
     }
 
-    const genres = this.props.artist.genres.map(genre => {
-      return <span>{genre}</span>
+    const genres = this.props.artist.genres.map((genre, i) => {
+      return <span key={i}>{genre}</span>
     })
 
     return (

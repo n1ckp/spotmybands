@@ -7,7 +7,6 @@ from django.conf.urls.static import static
 from spotmybands import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
     url(r'api/', include('spotmybands.api.urls')),
     re_path(r'^$', views.IndexView, name='index'),
 ]

@@ -79,7 +79,7 @@ module.exports = {
       },
       {
         test: /\.s?css$/,
-        include: path.join(__dirname, 'static/sass'),
+        include: path.join(__dirname, 'static'),
         loaders: [
           'style-loader?sourceMap',
           'css-loader?modules&importLoaders=1&localIdentName=[path]___[name]__[local]___[hash:base64:5]',
