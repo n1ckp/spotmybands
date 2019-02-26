@@ -1,53 +1,15 @@
 var webpack = require("webpack");
 var path = require("path");
-var env = process.env.NODE_ENV || 'dev'
-var prod = env === 'prod'
+var env = process.env.NODE_ENV || 'development'
+var prod = env === 'production'
 var mode = process.env.NODE_ENV || 'development'
+var TerserPlugin = require('terser-webpack-plugin');
 
-var entry = {
-  'main-app':  './static/js/app.js',
-}
-
-var plugins = [
-  new webpack.NoEmitOnErrorsPlugin(),
-  new webpack.NamedModulesPlugin(),
-]
-
-if (prod) {
-  plugins.push(new webpack.optimize.UglifyJsPlugin({
-    compress: true,
-    mangle: true,
-    sourceMap: true,
-  }))
-  plugins.push(new webpack.DefinePlugin({
-    'process.env': {
-      'NODE_ENV': '"production"'
-    }
-  }))
-
-  Object.keys(entry).map(function(appName) {
-    entry[appName] = [
-      'babel-polyfill',
-      entry[appName],
-    ]
-  })
-}
-else {
-  plugins.push(new webpack.HotModuleReplacementPlugin())
-
-  Object.keys(entry).map(function(appName) {
-    entry[appName] = [
-      'webpack-dev-server/client?http://localhost:3000/',
-      'webpack/hot/only-dev-server',
-      'babel-polyfill',
-      entry[appName],
-    ]
-  })
-}
-
-module.exports = {
+var config = {
   cache: true,
-  entry: entry,
+  entry: {
+    'main-app':  './static/js/app.js',
+  },
   mode: mode,
   devtool: 'source-map',
   output: {
@@ -55,7 +17,10 @@ module.exports = {
     publicPath: '/static/built/',
     filename: '[name].chunk.js',
   },
-  plugins: plugins,
+  plugins: [
+    new webpack.NoEmitOnErrorsPlugin(),
+    new webpack.NamedModulesPlugin(),
+  ],
   resolve: {
     modules: [
       path.join(__dirname, 'static/sass'),
@@ -103,4 +68,37 @@ module.exports = {
       }
     ]
   }
-};
+}
+
+if (prod) {
+  config.plugins.push(new webpack.DefinePlugin({
+    'process.env': {
+      'NODE_ENV': '"production"'
+    }
+  }))
+
+  Object.keys(config.entry).map(function(appName) {
+    config.entry[appName] = [
+      'babel-polyfill',
+      config.entry[appName],
+    ]
+  })
+
+  config.optimization = {
+    minimizer: [new TerserPlugin()],
+  }
+}
+else {
+  config.plugins.push(new webpack.HotModuleReplacementPlugin())
+
+  Object.keys(config.entry).map(function(appName) {
+    config.entry[appName] = [
+      'webpack-dev-server/client?http://localhost:3000/',
+      'webpack/hot/only-dev-server',
+      'babel-polyfill',
+      config.entry[appName],
+    ]
+  })
+}
+
+module.exports = config;
