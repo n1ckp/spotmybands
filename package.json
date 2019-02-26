@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "NODE_ENV=prod webpack",
-    "start": "node dev-server.js"
+    "start": "node dev-server.js",
+    "heroku-postbuild": "npm install && npm build"
   },
   "keywords": [
     "Spotify",
