@@ -6,6 +6,7 @@ export const save = (key, value) => {
     expiry,
     value,
   })
+
   window.localStorage.setItem(key, data)
 }
 
@@ -20,6 +21,7 @@ export const load = (key, _default) => {
 
   if (Date.now() > data.expiry) {
     remove(key)
+
     return _default
   }
 

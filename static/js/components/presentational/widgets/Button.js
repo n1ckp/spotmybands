@@ -6,7 +6,9 @@ import styles from 'components/widgets/Button.scss'
 
 export default class Button extends React.Component {
   onClick() {
-    this.props.onClick()
+    if (this.props.onClick) {
+      this.props.onClick()
+    }
   }
 
   render() {

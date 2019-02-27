@@ -13,7 +13,8 @@ export default class AddArtistsModal extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      artistSearchText: ''
+      open:             false,
+      artistSearchText: '',
     }
     this.artistSearch = undefined
   }
@@ -32,7 +33,6 @@ export default class AddArtistsModal extends React.Component {
       return <p>Loading...</p>
     }
     else if (this.props.spotifyArtists) {
-      console.log(this.props.spotifyArtists)
       return (
         <div className={styles.artists}>
           {this.props.spotifyArtists.map((a, index) => {
@@ -48,26 +48,33 @@ export default class AddArtistsModal extends React.Component {
 
   render() {
     return (
-      <ModalPanel
-        open={this.props.open}
-        onClose={() => this.props.onCloseModal()}>
-        <div id={styles.container}>
-          <div className={styles.actions}>
-            <Text
-              placeholder='Search for Artist...'
-              onChange={text => this.onChangeArtistSearch(text)}
-              icon={<SearchIcon />} />
+      <>
+        <div onClick={() => this.setState({open: true})}>{this.props.children}</div>
+        <ModalPanel
+          open={this.state.open}
+          onClose={() => this.setState({open: false})}>
+          <div id={styles.container}>
+            <div className={styles.actions}>
+              <Text
+                placeholder='Search for Artist...'
+                onChange={text => this.onChangeArtistSearch(text)}
+                icon={<SearchIcon />} />
+            </div>
+            <div className={styles.artistsContainer}>
+              {this.renderArtistSearchResults()}
+            </div>
           </div>
-          <div className={styles.artistsContainer}>
-            {this.renderArtistSearchResults()}
-          </div>
-        </div>
-      </ModalPanel>
+        </ModalPanel>
+      </>
     )
   }
 }
 
 AddArtistsModal.propTypes = {
-  open: PropTypes.bool,
-  onCloseModal: PropTypes.func,
+  loadingSpotifyArtists: PropTypes.bool,
+  userArtists:           PropTypes.object,
+  spotifyArtists:        PropTypes.array,
+  addToUserList:         PropTypes.func,
+  spotifySearchArtist:   PropTypes.func,
+  children:              PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
 }

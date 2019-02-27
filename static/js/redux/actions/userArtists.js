@@ -7,6 +7,7 @@ export const REMOVE_USER_ARTIST = 'REMOVE_USER_ARTIST'
 
 export const fetchUserArtists = () => {
   const artists = load('userArtists', {})
+
   return {
     type: FETCHED_USER_ARTISTS,
     artists,
@@ -30,6 +31,7 @@ export const removeUserArtist = artistID => {
 
 export const clearUserArtists = () => {
   remove('userArtists')
+
   return {
     type: CLEAR_USER_ARTISTS,
   }

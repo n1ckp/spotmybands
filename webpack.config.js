@@ -1,21 +1,21 @@
-var webpack = require("webpack");
-var path = require("path");
+var webpack = require('webpack')
+var path = require('path')
 var env = process.env.NODE_ENV || 'development'
 var prod = env === 'production'
 var mode = process.env.NODE_ENV || 'development'
-var TerserPlugin = require('terser-webpack-plugin');
+var TerserPlugin = require('terser-webpack-plugin')
 
 var config = {
   cache: true,
   entry: {
-    'main-app':  './static/js/app.js',
+    'main-app': './static/js/app.js',
   },
-  mode: mode,
+  mode:    mode,
   devtool: 'source-map',
-  output: {
-    path: path.join(__dirname, 'static/built'),
+  output:  {
+    path:       path.join(__dirname, 'static/built'),
     publicPath: '/static/built/',
-    filename: '[name].chunk.js',
+    filename:   '[name].chunk.js',
   },
   plugins: [
     new webpack.NoEmitOnErrorsPlugin(),
@@ -26,58 +26,58 @@ var config = {
       path.join(__dirname, 'static/sass'),
       path.join(__dirname, 'static/images'),
       path.join(__dirname, 'static/js'),
-      'node_modules'
+      'node_modules',
     ],
-    extensions: ['*', '.js']
+    extensions: ['*', '.js'],
   },
   module: {
     rules: [
       {
-        test: /\.jsx?$/,
+        test:    /\.jsx?$/,
         include: path.join(__dirname, 'static/js'),
-        use: {
-          loader: 'babel-loader',
+        use:     {
+          loader:  'babel-loader',
           options: {
-            presets: ['env', 'react', 'stage-1']
-          }
-        }
+            presets: ['@babel/env', '@babel/preset-react'],
+          },
+        },
       },
       {
-        test: /\.s?css$/,
+        test:    /\.s?css$/,
         include: path.join(__dirname, 'static'),
         loaders: [
           'style-loader?sourceMap',
           'css-loader?modules&importLoaders=1&localIdentName=[path]___[name]__[local]___[hash:base64:5]',
-          'sass-loader?sourceMap'
-        ]
+          'sass-loader?sourceMap',
+        ],
       },
       {
-        test: /\.svg/,
+        test:    /\.svg/,
         include: path.join(__dirname, 'static/images'),
-        loader: 'react-svg-loader'
+        loader:  'react-svg-loader',
       },
       {
-        test: /\.(png|gif|jpg|ttf|woff|eot)/,
+        test:    /\.(png|gif|jpg|ttf|woff|eot)/,
         include: path.join(__dirname, 'static/images'),
-        loader: 'url-loader'
+        loader:  'url-loader',
       },
       {
-        test: /\.json$/,
+        test:    /\.json$/,
         include: path.join(__dirname, 'static/js'),
-        loader: 'json-loader'
-      }
-    ]
-  }
+        loader:  'json-loader',
+      },
+    ],
+  },
 }
 
 if (prod) {
   config.plugins.push(new webpack.DefinePlugin({
     'process.env': {
-      'NODE_ENV': '"production"'
-    }
+      'NODE_ENV': '"production"',
+    },
   }))
 
-  Object.keys(config.entry).map(function(appName) {
+  Object.keys(config.entry).map((appName) => {
     config.entry[appName] = [
       'babel-polyfill',
       config.entry[appName],
@@ -91,7 +91,7 @@ if (prod) {
 else {
   config.plugins.push(new webpack.HotModuleReplacementPlugin())
 
-  Object.keys(config.entry).map(function(appName) {
+  Object.keys(config.entry).map((appName) => {
     config.entry[appName] = [
       'webpack-dev-server/client?http://localhost:3000/',
       'webpack/hot/only-dev-server',
@@ -101,4 +101,4 @@ else {
   })
 }
 
-module.exports = config;
+module.exports = config

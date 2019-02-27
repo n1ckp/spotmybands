@@ -1,4 +1,5 @@
-import React from 'react'
+import React, {useState} from 'react'
+import PropTypes from 'prop-types'
 
 import Text from 'components/presentational/widgets/Text'
 import Button from 'components/presentational/widgets/Button'
@@ -11,26 +12,63 @@ import SearchIcon from 'icons/search.svg'
 
 import styles from 'components/SavedArtists.scss'
 
-export default class SavedArtists extends React.Component {
+// React Hooks version. Doesn't work nicely with Redux... :/
+// const SavedArtists = props => {
+//   const [filteredArtists, setFilteredArtists] = useState(Object.values(props.artists))
+
+//   const artistTable = (
+//     <div className={styles.artistsContainer}>
+//       {Object.values(filteredArtists).map((artist, index) => {
+//         return <ArtistRow key={index} artist={artist} />
+//       })}
+//     </div>
+//   )
+
+//   const onChangeText = text => {
+//     const filtered = Object.values(props.artists).filter(a => a.name.toLowerCase().match(text.toLowerCase()))
+
+//     setFilteredArtists(filtered)
+//   }
+
+//   return (
+//     <div id={styles.container}>
+//       <h1>Your Artists</h1>
+//       <div className={styles.actions}>
+//         <Text
+//           placeholder='Search for Artist...'
+//           onChange={onChangeText}
+//           icon={<SearchIcon />} />
+//         <AddArtistsModalContainer>
+//           <Button text='Add Artists' type='primary' />
+//         </AddArtistsModalContainer>
+//       </div>
+//       {artistTable}
+//     </div>
+//   )
+// }
+
+class SavedArtists extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      modalOpen: false,
+      filteredArtists: Object.values(props.artists),
     }
-  }
-
-  onChangeSearchText(text) {
-    
   }
 
   renderArtistTable() {
     return (
       <div className={styles.artistsContainer}>
-        {Object.values(this.props.artists).map((artist, index) => {
+        {Object.values(this.state.filteredArtists).map((artist, index) => {
           return <ArtistRow key={index} artist={artist} />
         })}
       </div>
     )
+  }
+
+  handleChangeText(text) {
+    const filteredArtists = Object.values(this.props.artists).filter(a => a.name.toLowerCase().match(text.toLowerCase()))
+
+    this.setState({filteredArtists})
   }
 
   render() {
@@ -40,15 +78,20 @@ export default class SavedArtists extends React.Component {
         <div className={styles.actions}>
           <Text
             placeholder='Search for Artist...'
-            onChange={this.onChangeSearchText}
+            onChange={text => this.handleChangeText(text)}
             icon={<SearchIcon />} />
-          <Button text='Add Artists' type='primary' onClick={() => this.setState({modalOpen: true})} />
+          <AddArtistsModalContainer>
+            <Button text='Add Artists' type='primary' />
+          </AddArtistsModalContainer>
         </div>
         {this.renderArtistTable()}
-        <AddArtistsModalContainer
-          open={this.state.modalOpen}
-          onCloseModal={() => this.setState({modalOpen: false})} />
       </div>
     )
   }
 }
+
+SavedArtists.propTypes = {
+  artists: PropTypes.object,
+}
+
+export default SavedArtists

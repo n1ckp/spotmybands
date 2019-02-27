@@ -54,7 +54,7 @@ export default class ArtistRow extends React.Component {
 }
 
 ArtistRow.propTypes = {
-  artist: PropTypes.object.isRequired,
-  onUserList: PropTypes.bool,
+  artist:        PropTypes.object.isRequired,
+  onUserList:    PropTypes.bool,
   addToUserList: PropTypes.func,
 }
