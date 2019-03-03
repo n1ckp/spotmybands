@@ -6,51 +6,32 @@ import styles from 'components/tables/ArtistRow.scss'
 import Button from 'components/presentational/widgets/Button'
 
 
-export default class ArtistRow extends React.Component {
-  renderActions() {
-    let button
+const ArtistRow = props => {
+  const {artist, onUserList, addToUserList} = props
 
-    if (!this.props.onUserList) {
-      button = <Button text='Add to my list' onClick={() => this.props.addToUserList(this.props.artist)} />
-    }
-
-    return (
-      <div className={styles.actions}>
-        {button}
+  return (
+    <div id={styles.container}>
+      <span className={styles.icon} style={{backgroundImage: `url(${artist.logoURL})`}}></span>
+      <div className={styles.info}>
+        <h2>{artist.name}</h2>
+        {
+          !onUserList &&
+          artist.genres &&
+          <div className={styles.genres}>
+            {artist.genres.map((genre, i) => {
+              return <span key={i}>{genre}</span>
+            })}
+          </div>
+        }
       </div>
-    )
-  }
-
-  renderGenres() {
-    if (!this.props.artist.genres) {
-      return null
-    }
-
-    const genres = this.props.artist.genres.map((genre, i) => {
-      return <span key={i}>{genre}</span>
-    })
-
-    return (
-      <div className={styles.genres}>
-        {genres}
-      </div>
-    )
-  }
-
-  render() {
-    const artist = this.props.artist
-
-    return (
-      <div id={styles.container}>
-        <span className={styles.icon} style={{backgroundImage: `url(${artist.logoURL})`}}></span>
-        <div className={styles.info}>
-          <h2>{artist.name}</h2>
-          {this.renderGenres()}
+      {
+        !onUserList &&
+        <div className={styles.actions}>
+          <Button text='Add to my list' onClick={() => addToUserList(artist)} />
         </div>
-        {this.renderActions()}
-      </div>
-    )
-  }
+      }
+    </div>
+  )
 }
 
 ArtistRow.propTypes = {
@@ -58,3 +39,5 @@ ArtistRow.propTypes = {
   onUserList:    PropTypes.bool,
   addToUserList: PropTypes.func,
 }
+
+export default ArtistRow

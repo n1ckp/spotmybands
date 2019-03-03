@@ -3,32 +3,29 @@ import PropTypes from 'prop-types'
 
 import styles from 'components/widgets/Button.scss'
 
+const Button = props => {
+  const {className, type, text, onClick} = props
+  const classNames = [styles.button]
 
-export default class Button extends React.Component {
-  onClick() {
-    if (this.props.onClick) {
-      this.props.onClick()
-    }
+  if (type) {
+    classNames.push(styles[type])
+  }
+  if (className) {
+    classNames.push(className)
   }
 
-  render() {
-    let classNames = [styles.button]
-
-    if (this.props.type) {
-      classNames.push(styles[this.props.type])
-    }
-
-    return (
-      <button className={classNames.join(' ')} onClick={() => this.onClick()}>
-        <span className={styles.text}>{this.props.text}</span>
-      </button>
-    )
-  }
+  return (
+    <button className={classNames.join(' ')} onClick={() => onClick ? onClick() : null}>
+      <span className={styles.text}>{text}</span>
+    </button>
+  )
 }
 
 Button.propTypes = {
-  text: PropTypes.string,
-  type: PropTypes.string,
+  text:      PropTypes.string,
+  type:      PropTypes.string,
   className: PropTypes.string,
-  onClick: PropTypes.func,
+  onClick:   PropTypes.func,
 }
+
+export default Button
