@@ -3,9 +3,9 @@ import React from 'react'
 import SavedArtistsContainer from 'components/container/SavedArtistsContainer'
 import InfoPanel from 'components/presentational/InfoPanel'
 
-import LogoImage from 'logo.svg';
-import ArtistsImage from 'icons/nav/list-items.svg';
-import InfoImage from 'icons/nav/info.svg';
+import LogoImage from 'logo.svg'
+import ArtistsImage from 'icons/nav/list-items.svg'
+import InfoImage from 'icons/nav/info.svg'
 
 import styles from 'components/NavigationMenu.scss'
 
@@ -15,12 +15,11 @@ export default class NavigationMenu extends React.Component {
     super(props)
     this.state = {
       panelOpen: true,
-      selected: 'artists',
+      selected:  'artists',
     }
   }
 
   renderNavOptions() {
-    let options = ['artists', 'info']
     return (
       <div className={styles.navOptions}>
         <div className={this.state.selected === 'artists' ? styles.selected : null} onClick={() => this.setState({selected: 'artists'})}>

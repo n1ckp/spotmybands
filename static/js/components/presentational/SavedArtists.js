@@ -12,7 +12,6 @@ import SearchIcon from 'icons/search.svg'
 
 import styles from 'components/SavedArtists.scss'
 
-// React Hooks version. Doesn't work nicely with Redux... :/
 const SavedArtists = props => {
   const [filteredArtists, setFilteredArtists] = useState(Object.values(props.artists))
 
