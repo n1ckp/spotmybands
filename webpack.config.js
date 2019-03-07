@@ -47,7 +47,7 @@ var config = {
         include: path.join(__dirname, 'static'),
         use:     [
           {loader: 'style-loader?sourceMap'},
-          {loader: 'css-loader?modules&importLoaders=1&localIdentName=[path]___[name]__[local]___[hash:base64:5]'},
+          {loader: 'css-loader?modules&localIdentName=[path]___[name]__[local]___[hash:base64:5]'},
           {
             loader:  'sass-loader?sourceMap',
             options: {includePaths: [path.join(__dirname, 'static', 'sass')]},
