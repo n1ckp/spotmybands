@@ -45,10 +45,13 @@ var config = {
       {
         test:    /\.s?css$/,
         include: path.join(__dirname, 'static'),
-        loaders: [
-          'style-loader?sourceMap',
-          'css-loader?modules&importLoaders=1&localIdentName=[path]___[name]__[local]___[hash:base64:5]',
-          'sass-loader?sourceMap',
+        use:     [
+          {loader: 'style-loader?sourceMap'},
+          {loader: 'css-loader?modules&importLoaders=1&localIdentName=[path]___[name]__[local]___[hash:base64:5]'},
+          {
+            loader:  'sass-loader?sourceMap',
+            options: {includePaths: [path.join(__dirname, 'static', 'sass')]},
+          },
         ],
       },
       {
