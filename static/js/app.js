@@ -5,13 +5,13 @@ import {Route} from 'react-router'
 import {BrowserRouter} from 'react-router-dom'
 import configureStore from 'redux/store'
 
-import SpotMyBandsAppContainer from 'components/container/apps/SpotMyBandsAppContainer'
+import SpotMyBandsApp from 'components/SpotMyBandsApp'
 
 const renderApp = () => {
   render((
     <Provider store={configureStore()}>
       <BrowserRouter>
-        <Route path="/" component={SpotMyBandsAppContainer} />
+        <Route path="/" component={SpotMyBandsApp} />
       </BrowserRouter>
     </Provider>
   ), document.getElementById('app-root'))

@@ -1,0 +1,19 @@
+@import 'base-styles';
+
+#container {
+  margin-top: 24px;
+  h1 {
+    @include font-header;
+    margin-bottom: 24px;
+  }
+  .actions {
+    display: flex;
+    margin-bottom: 24px;
+  }
+  .artistsContainer {
+    width: 100%;
+    height: calc(100vh - 156px);
+    background-color: $colour-lighter-grey;
+    border: solid 1px $colour-light-grey;
+  }
+}
