@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 
 import SavedArtists from 'components/SavedArtists'
 import InfoPanel from 'components/InfoPanel'
@@ -10,61 +10,44 @@ import InfoImage from 'icons/nav/info.svg'
 import styles from './styles.scss'
 
 
-export default class NavigationMenu extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      panelOpen: true,
-      selected:  'artists',
-    }
+const NavigationMenu = props => {
+  const [panelOpen, setPanelOpen] = useState(true)
+  const [selected, setSelected] = useState('artists')
+
+  let classNames = [styles.panel]
+  let selectedPanel
+
+  if (panelOpen) {
+    classNames.push(styles.open)
   }
 
-  renderNavOptions() {
-    return (
-      <div className={styles.navOptions}>
-        <div className={this.state.selected === 'artists' ? styles.selected : null} onClick={() => this.setState({selected: 'artists'})}>
-          <ArtistsImage />
-        </div>
-        <div className={this.state.selected === 'info' ? styles.selected : null} onClick={() => this.setState({selected: 'info'})}>
-          <InfoImage />
-        </div>
-      </div>
-    )
+  if (selected === 'artists') {
+    selectedPanel = <SavedArtists />
+  }
+  else if (selected === 'info') {
+    selectedPanel = <InfoPanel />
   }
 
-  renderPanel() {
-    let classNames = [styles.panel]
-    let selectedPanel
-
-    if (this.state.panelOpen) {
-      classNames.push(styles.open)
-    }
-
-    if (this.state.selected === 'artists') {
-      selectedPanel = <SavedArtists />
-    }
-    else if (this.state.selected === 'info') {
-      selectedPanel = <InfoPanel />
-    }
-
-    return (
-      <div className={classNames.join(' ')}>
-        {selectedPanel}
-      </div>
-    )
-  }
-
-  render() {
-    return (
-      <div id={styles.container}>
-        <div className={styles.inner}>
-          <div className={styles.gutter}>
-            <LogoImage width={40} height={49} className={styles.logo} />
-            {this.renderNavOptions()}
+  return (
+    <div id={styles.container}>
+      <div className={styles.inner}>
+        <div className={styles.gutter}>
+          <LogoImage width={40} height={49} className={styles.logo} />
+          <div className={styles.navOptions}>
+            <div className={selected === 'artists' ? styles.selected : null} onClick={() => setSelected('artists')}>
+              <ArtistsImage />
+            </div>
+            <div className={selected === 'info' ? styles.selected : null} onClick={() => setSelected('info')}>
+              <InfoImage />
+            </div>
           </div>
-          {this.renderPanel()}
+        </div>
+        <div className={classNames.join(' ')}>
+          {selectedPanel}
         </div>
       </div>
-    )
-  }
+    </div>
+  )
 }
+
+export default NavigationMenu

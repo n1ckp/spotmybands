@@ -5,13 +5,13 @@ import SMBGoogleMap from 'components/SMBGoogleMap'
 
 import styles from './styles.scss'
 
-export default class SpotMyBandsApp extends React.Component {
-  render() {
-    return (
-      <div id={styles.container}>
-        <NavigationMenu />
-        <SMBGoogleMap />
-      </div>
-    )
-  }
+const SpotMyBandsApp = () => {
+  return (
+    <div id={styles.container}>
+      <NavigationMenu />
+      <SMBGoogleMap />
+    </div>
+  )
 }
+
+export default SpotMyBandsApp

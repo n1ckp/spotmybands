@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import {connect} from 'react-redux'
 import {withGoogleMap, GoogleMap, Marker} from 'react-google-maps'
 
 import styles from './styles.scss'
@@ -36,20 +35,4 @@ SMBGoogleMap.propTypes = {
   events: PropTypes.array,
 }
 
-const mapStateToProps = state => {
-  const events = []
-
-  Object.values(state.events).forEach(artistEvents => {
-    if (!artistEvents.hidden) {
-      events.push(...artistEvents.events)
-    }
-  })
-
-  return {
-    events,
-  }
-}
-
-const SMBGoogleMapContainer = connect(mapStateToProps)(SMBGoogleMap)
-
-export default SMBGoogleMapContainer
+export default SMBGoogleMap
