@@ -10,7 +10,7 @@ const ArtistRow = props => {
   const {
     artist, onUserList, addToUserList, fetchArtistEvents,
     toggleEvents, eventsNotFetched, eventsHidden,
-    onRemoveArtist,
+    onRemoveArtist, noEvents, fetchingEvents,
   } = props
 
   let button = undefined
@@ -21,6 +21,12 @@ const ArtistRow = props => {
   }
   else if (eventsNotFetched) {
     button = <Button onClick={() => fetchArtistEvents()}>Fetch Events</Button>
+  }
+  else if (fetchingEvents) {
+    button = <p>Fetching events...</p>
+  }
+  else if (noEvents) {
+    button = <p>No upcoming events.</p>
   }
   else {
     button = <Button onClick={() => toggleEvents(eventsHidden)}>
@@ -64,6 +70,8 @@ ArtistRow.propTypes = {
   eventsHidden:      PropTypes.bool,
   toggleEvents:      PropTypes.func,
   onRemoveArtist:    PropTypes.func,
+  noEvents:          PropTypes.bool,
+  fetchingEvents:    PropTypes.bool,
 }
 
 export default ArtistRow

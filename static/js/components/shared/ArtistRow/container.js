@@ -6,13 +6,18 @@ import ArtistRow from './component'
 
 const mapStateToProps = (state, ownProps) => {
   const {id} = ownProps.artist
+  const artistData = state.events[id]
 
-  const eventsNotFetched = state.events[id] === undefined
-  const eventsHidden = state.events[id] && !state.events[id].hidden
+  const fetchingEvents = artistData && artistData.loading
+  const eventsNotFetched = artistData === undefined
+  const eventsHidden = artistData && !artistData.hidden
+  const noEvents = artistData && !artistData.loading && artistData.events.length === 0
 
   return {
     eventsNotFetched,
     eventsHidden,
+    noEvents,
+    fetchingEvents,
   }
 }
 
