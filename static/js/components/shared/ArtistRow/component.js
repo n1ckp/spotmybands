@@ -1,8 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import {connect} from 'react-redux'
-
-import {fetchArtistEvents, toggleArtistEvents} from 'redux/actions'
 
 import styles from './styles.scss'
 
@@ -13,9 +10,11 @@ const ArtistRow = props => {
   const {
     artist, onUserList, addToUserList, fetchArtistEvents,
     toggleEvents, eventsNotFetched, eventsHidden,
+    onRemoveArtist,
   } = props
 
   let button = undefined
+  let removeButton = undefined
 
   if (!onUserList) {
     button = <Button onClick={() => addToUserList(artist)}>Add to my list</Button>
@@ -27,6 +26,10 @@ const ArtistRow = props => {
     button = <Button onClick={() => toggleEvents(eventsHidden)}>
       {`${eventsHidden ? 'Hide' : 'Show'} Events`}
     </Button>
+  }
+
+  if (onUserList) {
+    removeButton = <Button onClick={() => onRemoveArtist()}>Remove</Button>
   }
 
   return (
@@ -46,6 +49,7 @@ const ArtistRow = props => {
       </div>
       <div className={styles.actions}>
         {button}
+        {removeButton}
       </div>
     </div>
   )
@@ -59,35 +63,7 @@ ArtistRow.propTypes = {
   eventsNotFetched:  PropTypes.bool,
   eventsHidden:      PropTypes.bool,
   toggleEvents:      PropTypes.func,
+  onRemoveArtist:    PropTypes.func,
 }
 
-const mapStateToProps = (state, ownProps) => {
-  const {id} = ownProps.artist
-
-  const eventsNotFetched = state.events[id] === undefined
-  const eventsHidden = state.events[id] && !state.events[id].hidden
-
-  return {
-    eventsNotFetched,
-    eventsHidden,
-  }
-}
-
-const mapDispatchToProps = (dispatch, ownProps) => {
-  return {
-    fetchArtistEvents: () => {
-      const {name, id} = ownProps.artist
-
-      dispatch(fetchArtistEvents(name, id))
-    },
-    toggleEvents: value => {
-      const {id} = ownProps.artist
-
-      dispatch(toggleArtistEvents(id, value))
-    },
-  }
-}
-
-const ArtistRowContainer = connect(mapStateToProps, mapDispatchToProps)(ArtistRow)
-
-export default ArtistRowContainer
+export default ArtistRow

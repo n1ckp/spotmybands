@@ -18,7 +18,7 @@ const AddArtistsModal = props => {
   const onChangeArtistSearch = text => {
     clearTimeout(artistSearch.current)
     artistSearch.current = setTimeout(() => {
-      props.spotifySearchArtist(artistSearchText)
+      props.spotifySearchArtist(text)
     }, 2000)
     setArtistSearchText(text)
   }

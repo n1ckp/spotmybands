@@ -8,7 +8,7 @@ const mapStateToProps = state => {
   return {
     loadingSpotifyArtists: state.spotify.artists.loading,
     spotifyArtists:        state.spotify.artists.list,
-    userArtists:           state.userArtists.artists,
+    userArtists:           state.userArtists,
   }
 }
 

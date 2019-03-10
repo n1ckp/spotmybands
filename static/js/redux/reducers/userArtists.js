@@ -24,34 +24,25 @@ const DEFAULT_ARTISTS = {
 }
 
 const getInitialState = () => {
-  return {
-    artists: load('userArtists') || {},
-  }
+  return load('userArtists') || {}
 }
 
 export default function userArtists(state = getInitialState(), action) {
   let updatedState = Object.assign({}, state)
 
   if (action.type === FETCHED_USER_ARTISTS) {
-    updatedState.artists = action.artists
+    updatedState = action.artists
   }
   else if (action.type === ADD_USER_ARTIST) {
-    const updatedArtists = Object.assign({}, updatedState.artists)
-
-    updatedArtists[action.artistID] = action.artist
-    updatedState.artists = updatedArtists
+    updatedState[action.artistID] = action.artist
   }
   else if (action.type === REMOVE_USER_ARTIST) {
-    const updatedArtists = Object.assign({}, updatedState.artists)
-
-    delete updatedArtists[action.artistID]
-
-    updatedState.artists = updatedArtists
+    delete updatedState[action.artistID]
   }
   else if (action.type === CLEAR_USER_ARTISTS) {
-    updatedState.artists = {}
+    updatedState = {}
   }
-  save('userArtists', updatedState.artists)
+  save('userArtists', updatedState)
 
   return updatedState
 }

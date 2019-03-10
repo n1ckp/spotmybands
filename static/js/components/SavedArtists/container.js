@@ -4,7 +4,7 @@ import SavedArtists from './component'
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    artists: state.userArtists.artists,
+    artists: state.userArtists,
   }
 }
 
