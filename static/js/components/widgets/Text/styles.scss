@@ -8,6 +8,7 @@
   height: 40px;
   padding: 8px;
   @include base-transition(0.2s);
+  background-color: white;
   .icon {
     width: 24px;
     height: 24px;

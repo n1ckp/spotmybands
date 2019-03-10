@@ -18,15 +18,15 @@ const ArtistRow = props => {
   let button = undefined
 
   if (!onUserList) {
-    button = <Button text='Add to my list' onClick={() => addToUserList(artist)} />
+    button = <Button onClick={() => addToUserList(artist)}>Add to my list</Button>
   }
   else if (eventsNotFetched) {
-    button = <Button text='Fetch Events' onClick={() => fetchArtistEvents()} />
+    button = <Button onClick={() => fetchArtistEvents()}>Fetch Events</Button>
   }
   else {
-    button = <Button
-      text={`${eventsHidden ? 'Hide' : 'Show'} Events`}
-      onClick={() => toggleEvents(eventsHidden)} />
+    button = <Button onClick={() => toggleEvents(eventsHidden)}>
+      {`${eventsHidden ? 'Hide' : 'Show'} Events`}
+    </Button>
   }
 
   return (

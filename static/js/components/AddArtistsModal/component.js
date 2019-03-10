@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState, useRef, useEffect} from 'react'
 import PropTypes from 'prop-types'
 
 import ModalPanel from 'components/ModalPanel'
@@ -8,6 +8,42 @@ import ArtistRow from 'components/shared/ArtistRow'
 import SearchIcon from 'icons/search.svg'
 
 import styles from './styles.scss'
+
+// const AddArtistsModal = props => {
+//   const {children} = props
+//   const [open, setModalOpen] = useState(false)
+//   const [artistSearchText, setArtistSearchText] = useState('')
+//   const artistSearch = useRef()
+
+//   const onChangeArtistSearch = text => {
+//     clearTimeout(this.artistSearch)
+//     artistSearch.current = setTimeout(() => {
+//       props.spotifySearchArtist(artistSearchText)
+//     }, 2000)
+//     setArtistSearchText(text)
+//   }
+
+//   return (
+//     <>
+//       <div onClick={() => setModalOpen(true)}>{children}</div>
+//       <ModalPanel
+//         open={open}
+//         onClose={() => setModalOpen(false)}>
+//         <div id={styles.container}>
+//           <div className={styles.actions}>
+//             <Text
+//               placeholder='Search for Artist...'
+//               onChange={text => onChangeArtistSearch(text)}
+//               icon={<SearchIcon />} />
+//           </div>
+//           <div className={styles.artistsContainer}>
+//             {this.renderArtistSearchResults()}
+//           </div>
+//         </div>
+//       </ModalPanel>
+//     </>
+//   )
+// }
 
 export default class AddArtistsModal extends React.Component {
   constructor(props) {

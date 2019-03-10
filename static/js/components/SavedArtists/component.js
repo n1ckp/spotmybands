@@ -38,7 +38,7 @@ const SavedArtists = props => {
           onChange={onChangeText}
           icon={<SearchIcon />} />
         <AddArtistsModal>
-          <Button text='Add Artists' type='primary' />
+          <Button type='primary'>Add Artists</Button>
         </AddArtistsModal>
       </div>
       {artistTable}

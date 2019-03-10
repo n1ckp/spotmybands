@@ -14,12 +14,12 @@
     height: 24px;
     display: inline-block;
   }
-  .text {
+  .inner {
     @include font-small-1;
   }
   &.primary {
     background-color: $colour-purple;
-    .text {
+    .inner {
       color: white;
     }
   }

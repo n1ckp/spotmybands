@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import styles from './styles.scss'
 
 const Button = props => {
-  const {className, type, text, onClick} = props
+  const {className, type, children, onClick} = props
   const classNames = [styles.button]
 
   if (type) {
@@ -16,13 +16,13 @@ const Button = props => {
 
   return (
     <button className={classNames.join(' ')} onClick={() => onClick ? onClick() : null}>
-      <span className={styles.text}>{text}</span>
+      <div className={styles.inner}>{children}</div>
     </button>
   )
 }
 
 Button.propTypes = {
-  text:      PropTypes.string,
+  children:  PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
   type:      PropTypes.string,
   className: PropTypes.string,
   onClick:   PropTypes.func,
