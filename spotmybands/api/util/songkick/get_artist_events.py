@@ -35,6 +35,8 @@ def get_artist_events(artist_name):
             continue
 
         payload.append({
+            'id': event['id'],
+            'artist': artist_name,
             'venue': venue,
             'date': event['start']['date'],
             'songkickURL': event['uri'],
