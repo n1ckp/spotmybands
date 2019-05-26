@@ -5,6 +5,8 @@ var prod = env === 'production'
 var mode = process.env.NODE_ENV || 'development'
 var TerserPlugin = require('terser-webpack-plugin')
 
+var STATIC_PATH = path.join(__dirname, 'static')
+
 var config = {
   cache: true,
   entry: {
@@ -13,7 +15,7 @@ var config = {
   mode:    mode,
   devtool: 'source-map',
   output:  {
-    path:       path.join(__dirname, 'static/built'),
+    path:       path.join(STATIC_PATH, 'built'),
     publicPath: '/static/built/',
     filename:   '[name].chunk.js',
   },
@@ -23,9 +25,9 @@ var config = {
   ],
   resolve: {
     modules: [
-      path.join(__dirname, 'static/sass'),
-      path.join(__dirname, 'static/images'),
-      path.join(__dirname, 'static/js'),
+      path.join(STATIC_PATH, 'sass'),
+      path.join(STATIC_PATH, 'images'),
+      path.join(STATIC_PATH, 'js'),
       'node_modules',
     ],
     extensions: ['*', '.js'],
@@ -34,7 +36,7 @@ var config = {
     rules: [
       {
         test:    /\.jsx?$/,
-        include: path.join(__dirname, 'static/js'),
+        include: path.join(STATIC_PATH, 'js'),
         use:     {
           loader:  'babel-loader',
           options: {
@@ -44,29 +46,29 @@ var config = {
       },
       {
         test:    /\.s?css$/,
-        include: path.join(__dirname, 'static'),
+        include: path.join(STATIC_PATH),
         use:     [
           {loader: 'style-loader?sourceMap'},
           {loader: 'css-loader?modules&localIdentName=[path]___[name]__[local]___[hash:base64:5]'},
           {
             loader:  'sass-loader?sourceMap',
-            options: {includePaths: [path.join(__dirname, 'static', 'sass')]},
+            options: {includePaths: [path.join(STATIC_PATH, 'sass')]},
           },
         ],
       },
       {
         test:    /\.svg/,
-        include: path.join(__dirname, 'static/images'),
+        include: path.join(STATIC_PATH, 'images'),
         loader:  'react-svg-loader',
       },
       {
         test:    /\.(png|gif|jpg|ttf|woff|eot)/,
-        include: path.join(__dirname, 'static/images'),
+        include: path.join(STATIC_PATH, 'images'),
         loader:  'url-loader',
       },
       {
         test:    /\.json$/,
-        include: path.join(__dirname, 'static/js'),
+        include: path.join(STATIC_PATH, 'js'),
         loader:  'json-loader',
       },
     ],
