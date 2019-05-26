@@ -8,7 +8,7 @@ import os
 keys_dict = keys.__dict__
 
 heroku_keys = [
-    'SECRET_KEY',
+    'DJANGO_SECRET_KEY',
     'GOOGLE_MAPS_API_KEY',
     'SONGKICK_API_KEY',
     'SPOTIFY_CLIENT_ID',
