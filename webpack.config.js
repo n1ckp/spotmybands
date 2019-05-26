@@ -16,7 +16,7 @@ var config = {
   devtool: 'source-map',
   output:  {
     path:       path.join(STATIC_PATH, 'built'),
-    publicPath: '/static/built/',
+    publicPath: path.join(STATIC_PATH, 'built'),
     filename:   '[name].chunk.js',
   },
   plugins: [
