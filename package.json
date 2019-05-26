@@ -1,6 +1,9 @@
 {
   "name": "spotmybands",
   "version": "1.0.0",
+  "engines": {
+    "node": "10.15.3"
+  },
   "description": "The place for quickly spotting events for the bands you listen to",
   "main": "index.js",
   "scripts": {
