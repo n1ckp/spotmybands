@@ -47,3 +47,9 @@
     }
   }
 }
+
+@include tablet {
+  #container {
+    flex-direction: column;
+  }
+}

@@ -9,6 +9,10 @@
   .actions {
     display: flex;
     margin-bottom: 24px;
+    .button {
+      height: 40px;
+      margin-left: 16px;
+    }
   }
   .artistsContainer {
     width: 100%;

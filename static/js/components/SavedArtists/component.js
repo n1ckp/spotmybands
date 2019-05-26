@@ -34,7 +34,7 @@ const SavedArtists = props => {
           onChange={text => setFilterText(text)}
           icon={<SearchIcon />} />
         <AddArtistsModal>
-          <Button type='primary'>Add Artists</Button>
+          <Button type='primary' className={styles.button}>Add Artists</Button>
         </AddArtistsModal>
       </div>
       {artistTable}

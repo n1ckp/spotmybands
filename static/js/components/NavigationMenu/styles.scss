@@ -4,12 +4,14 @@
   height: calc(100vh - 4px);
   display: inline-block;
   box-shadow: 2px 0 2px 0 $colour-light-grey;
+  width: 50%;
   .inner {
-    display: block;
+    display: flex;
     .gutter {
       padding: 24px;
       display: inline-block;
       vertical-align: top;
+      flex: none;
       .logo {
         margin-bottom: 8px;
         ellipse, rect, path:last-child {
@@ -37,7 +39,7 @@
     .panel {
       display: inline-block;
       margin-right: 24px;
-      width: 572px;
+      flex: 1;
     }
   }
 }

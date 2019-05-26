@@ -3,20 +3,23 @@ import json
 import requests
 
 from django.shortcuts import render
+from django.conf import settings
 
 
 def IndexView(request):
-    keys = json.load(open('spotmybands/utils/keys.json'))
-
     # Authorize with Spotify
-    b64Key = base64.b64encode('{}:{}'.format(keys['SpotifyClientID'], keys['SpotifyClientSecret']).encode())
+    b64Key = base64.b64encode('{}:{}'.format(
+        settings.SPOTIFY_CLIENT_ID, settings.SPOTIFY_CLIENT_SECRET).encode()
+    )
     headers = {
         'Authorization': 'Basic {}'.format(b64Key.decode())
     }
     data = {
         'grant_type': 'client_credentials'
     }
-    r = requests.post('https://accounts.spotify.com/api/token', headers=headers, data=data)
+    r = requests.post(
+        'https://accounts.spotify.com/api/token', headers=headers, data=data
+    )
     access_token = None
     try:
         response_data = json.loads(r.text)
@@ -25,9 +28,9 @@ def IndexView(request):
         pass
 
     appData = {
-        'SpotifyClientID': keys['SpotifyClientID'],
+        'SpotifyClientID': settings.SPOTIFY_CLIENT_ID,
         'SpotifyAccessToken': access_token,
-        'google_maps_api_key': keys['GoogleMapsAPIKey'],
+        'GoogleMapsAPIKey': settings.GOOGLE_MAPS_API_KEY,
     }
 
     return render(request, 'index.html', {'appData': appData})

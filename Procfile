@@ -1,1 +1,1 @@
-web: gunicorn spotmybands.wsgi
+web: DJANGO_ENV=PROD gunicorn spotmybands.wsgi

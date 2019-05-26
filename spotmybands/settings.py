@@ -1,21 +1,33 @@
 import os
 import django_heroku
 
+DEV_MODE = os.environ.get('DJANGO_ENV') == 'DEV'
+
+DEBUG = DEV_MODE
+
+if DEV_MODE:
+    try:
+        from spotmybands import keys_dev
+    except ImportError:
+        raise Exception(
+            "A keys_dev.py file is required to run this project in development")
+    SECRET_KEY = keys_dev.DJANGO_SECRET_KEY
+    GOOGLE_MAPS_API_KEY = keys_dev.GOOGLE_MAPS_API_KEY
+    SONGKICK_API_KEY = keys_dev.SONGKICK_API_KEY
+    SPOTIFY_CLIENT_ID = keys_dev.SPOTIFY_CLIENT_ID
+    SPOTIFY_CLIENT_SECRET = keys_dev.SPOTIFY_CLIENT_SECRET
+else:
+    SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
+    GOOGLE_MAPS_API_KEY = os.environ.get('GOOGLE_MAPS_API_KEY')
+    SONGKICK_API_KEY = os.environ.get('SONGKICK_API_KEY')
+    SPOTIFY_CLIENT_ID = os.environ.get('SPOTIFY_CLIENT_ID')
+    SPOTIFY_CLIENT_SECRET = os.environ.get('SPOTIFY_CLIENT_SECRET')
+
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'ou4x4-n+jfl$_7ux3x-h&n&s#d(cj)ocbs=tp!l7x3h=z=k*ar'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
 ALLOWED_HOSTS = []
-
 
 # Application definition
 

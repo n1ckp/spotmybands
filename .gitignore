@@ -8,3 +8,7 @@ npm-debug.log
 
 # Webpack
 static/built
+
+# keys
+keys.py
+keys_dev.py

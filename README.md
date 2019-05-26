@@ -6,17 +6,31 @@ The place for quickly spotting events for the bands you listen to
 
 ### Local Development ###
 
-```
-make api
-
-make js # Default port is 3000
-```
+You must first set keys for the project (not checked into this repo for obvious reasons)
 
 ## API keys ##
 
-Stored in `spotmybands/utils/keys.json`
+Two api key files are required, one for production (`<project root>/spotmybands/keys_dev.py`) and one for development (`<project root>/keys.py`) as follows:
+
+```python
+DJANGO_SECRET_KEY = '<key>'
+GOOGLE_MAPS_API_KEY = "<key>"
+SONGKICK_API_KEY = "<key>"
+SPOTIFY_CLIENT_ID = "<key>"
+SPOTIFY_CLIENT_SECRET = "<key>"
+```
+
+```
+make server # Runs Django backend
+
+make client # Runs webpack dev server for react app. Default port is 3000
+```
+
+
 
 ## Deploying to Heroku ##
+
+
 
 1. Ensure you have the Heroku CLI installed, and go to project root.
 2. `heroku login`

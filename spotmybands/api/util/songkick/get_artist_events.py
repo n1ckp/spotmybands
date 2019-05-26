@@ -3,13 +3,17 @@ import requests
 
 from urllib.parse import urlencode
 
+from django.conf import settings
+
+
 def get_artist_events(artist_name):
-    keys = json.load(open('spotmybands/utils/keys.json'))
     params = {
-        'apikey': keys['SongkickAPIKey'],
+        'apikey': settings.SONGKICK_API_KEY,
         'artist_name': artist_name,
     }
-    url = 'https://api.songkick.com/api/3.0/events.json?{}'.format(urlencode(params))
+    url = 'https://api.songkick.com/api/3.0/events.json?{}'.format(
+        urlencode(params)
+    )
     res = requests.get(url)
     res_data = json.loads(res.text)
 
@@ -42,6 +46,5 @@ def get_artist_events(artist_name):
             'songkickURL': event['uri'],
             'name': event['displayName'],
         })
-    
+
     return payload
-    

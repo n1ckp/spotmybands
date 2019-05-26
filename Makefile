@@ -5,7 +5,7 @@ node_modules: package.json
 	npm install
 
 server: venv
-	venv/bin/python3 manage.py runserver 0.0.0.0:$(PORT)
+	DJANGO_ENV=DEV venv/bin/python3 manage.py runserver 0.0.0.0:$(PORT)
 
-js: node_modules
-	npm start
+client: node_modules
+	npm run dev
