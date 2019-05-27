@@ -18,12 +18,14 @@ class SpotifyArtistSearchView(View):
         headers = {
             'Authorization': 'Bearer {}'.format(params['access_token'])
         }
-        url = 'https://api.spotify.com/v1/search?type=artist&q={}'.format(params['q'])
+        url = 'https://api.spotify.com/v1/search?type=artist&q={}*'.format(
+            params['q'])
         r = requests.get(url, headers=headers)
         response_data = json.loads(r.text)
-        
+
         if not response_data.get('artists'):
             raise Http404
-        
-        artists = [ArtistImporter(a).process() for a in response_data['artists']['items']]
+
+        artists = [ArtistImporter(a).process()
+                   for a in response_data['artists']['items']]
         return JsonResponse({'artists': artists})

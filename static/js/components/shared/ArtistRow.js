@@ -7,6 +7,7 @@ import {fetchArtistEvents, toggleArtistEvents, removeUserArtist} from 'redux/act
 import styles from './ArtistRow.scss'
 
 import Button from 'components/shared/widgets/Button'
+import DeleteIcon from 'icons/delete.svg'
 
 
 const ArtistRow = props => {
@@ -15,6 +16,7 @@ const ArtistRow = props => {
     toggleEvents, eventsNotFetched, eventsHidden,
     onRemoveArtist, noEvents, fetchingEvents,
   } = props
+  const classNames = []
 
   let button = undefined
   let removeButton = undefined
@@ -29,6 +31,7 @@ const ArtistRow = props => {
     button = <p>Fetching events...</p>
   }
   else if (noEvents) {
+    classNames.push(styles.noEvents)
     button = <p>No upcoming events.</p>
   }
   else {
@@ -38,11 +41,11 @@ const ArtistRow = props => {
   }
 
   if (onUserList) {
-    removeButton = <Button onClick={() => onRemoveArtist()}>Remove</Button>
+    removeButton = <Button className={styles.delete} onClick={() => onRemoveArtist()}><DeleteIcon /></Button>
   }
 
   return (
-    <div id={styles.container}>
+    <div id={styles.container} className={classNames.join(' ')}>
       <span className={styles.icon} style={{backgroundImage: `url(${artist.logoURL})`}}></span>
       <div className={styles.info}>
         <h2>{artist.name}</h2>

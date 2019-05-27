@@ -46,6 +46,29 @@
       }
     }
   }
+  .actions {
+    display: flex;
+    align-items: center;
+    button, p {
+      margin-right: 8px;
+      &:last-child {
+        margin-right: 0;
+      }
+      &.delete {
+        padding: 0;
+        border: 0;
+        background: transparent;
+        svg {
+          width: 20px;
+          height: 20px;
+          fill: $colour-dark-grey;
+        }
+      }
+    }
+  }
+  &.noEvents {
+    background-color: $colour-light-grey;
+  }
 }
 
 @include tablet {
