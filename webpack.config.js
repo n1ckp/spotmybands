@@ -10,11 +10,13 @@ var STATIC_PATH = path.join(__dirname, 'static')
 var config = {
   cache: true,
   entry: {
-    'main-app': './static/js/app.js',
+    'main-app': [
+      'babel-polyfill',
+      path.join(STATIC_PATH, 'js', 'app.js'),
+    ],
   },
-  mode:    mode,
-  devtool: 'source-map',
-  output:  {
+  mode:   mode,
+  output: {
     path:       path.join(STATIC_PATH, 'built'),
     publicPath: path.join(STATIC_PATH, 'built'),
     filename:   '[name].chunk.js',
@@ -48,10 +50,16 @@ var config = {
         test:    /\.s?css$/,
         include: path.join(STATIC_PATH),
         use:     [
-          {loader: 'style-loader?sourceMap'},
-          {loader: 'css-loader?modules&localIdentName=[path]___[name]__[local]___[hash:base64:5]'},
+          'style-loader',
           {
-            loader:  'sass-loader?sourceMap',
+            loader:  'css-loader',
+            options: {
+              modules:        true,
+              localIdentName: '[path]___[name]__[local]___[hash:base64:5]',
+            },
+          },
+          {
+            loader:  'sass-loader',
             options: {includePaths: [path.join(STATIC_PATH, 'sass')]},
           },
         ],
@@ -82,28 +90,29 @@ if (prod) {
     },
   }))
 
-  Object.keys(config.entry).map((appName) => {
-    config.entry[appName] = [
-      'babel-polyfill',
-      config.entry[appName],
-    ]
-  })
-
   config.optimization = {
     minimizer: [new TerserPlugin()],
   }
 }
 else {
+  config.devtool = 'source-map',
   config.plugins.push(new webpack.HotModuleReplacementPlugin())
 
-  Object.keys(config.entry).map((appName) => {
-    config.entry[appName] = [
-      'webpack-dev-server/client?http://localhost:3000/',
-      'webpack/hot/only-dev-server',
-      'babel-polyfill',
-      config.entry[appName],
-    ]
-  })
+  config.devServer = {
+    contentBase: '/static/built/',
+    port:        3000,
+    proxy:       {
+      '*': 'http://localhost:8000',
+    },
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+    },
+    historyApiFallback: true,
+    hot:                true,
+  }
+
+  config.module.rules[1].use[0] = 'style-loader?sourceMap'
+  config.module.rules[1].use[2].options.sourceMap = true
 }
 
 module.exports = config

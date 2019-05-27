@@ -9,7 +9,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "NODE_ENV=production webpack",
-    "dev": "node dev-server.js",
+    "dev": "webpack-dev-server --config webpack.config.js --host 0.0.0.0",
     "heroku-postbuild": "npm install && npm run build",
     "storybook": "start-storybook"
   },
