@@ -18,7 +18,7 @@ var config = {
   mode:   mode,
   output: {
     path:       path.join(STATIC_PATH, 'built'),
-    publicPath: path.join(STATIC_PATH, 'built'),
+    publicPath: '/static/built/',
     filename:   '[name].chunk.js',
   },
   plugins: [
@@ -95,7 +95,7 @@ if (prod) {
   }
 }
 else {
-  config.devtool = 'source-map',
+  config.devtool = 'eval'
   config.plugins.push(new webpack.HotModuleReplacementPlugin())
 
   config.devServer = {
