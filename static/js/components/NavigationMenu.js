@@ -32,7 +32,7 @@ const NavigationMenu = props => {
     <div id={styles.container}>
       <div className={styles.inner}>
         <div className={styles.gutter}>
-          <LogoImage width={40} height={49} className={styles.logo} />
+          <LogoImage onClick={() => setSelected('artists')} width={40} height={49} className={styles.logo} />
           <div className={styles.navOptions}>
             <div className={selected === 'artists' ? styles.selected : null} onClick={() => setSelected('artists')}>
               <ArtistsImage />
