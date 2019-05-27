@@ -2,7 +2,7 @@ import React from 'react'
 import {storiesOf} from '@storybook/react'
 import {withKnobs, text, radios} from '@storybook/addon-knobs'
 
-import Button from 'components/widgets/Button'
+import Button from 'components/shared/widgets/Button'
 
 const label = 'type'
 const options = {

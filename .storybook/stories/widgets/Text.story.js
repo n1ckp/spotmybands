@@ -2,7 +2,7 @@ import React from 'react'
 import {storiesOf} from '@storybook/react'
 import {withKnobs, text} from '@storybook/addon-knobs'
 
-import Text from 'components/widgets/Text'
+import Text from 'components/shared/widgets/Text'
 
 class Wrapper extends React.Component {
   constructor(props) {

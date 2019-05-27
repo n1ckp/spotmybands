@@ -3,7 +3,7 @@ import React from 'react'
 import NavigationMenu from 'components/NavigationMenu'
 import SMBGoogleMap from 'components/SMBGoogleMap'
 
-import styles from './styles.scss'
+import styles from './SpotMyBandsApp.scss'
 
 const SpotMyBandsApp = () => {
   return (

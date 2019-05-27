@@ -1,13 +1,16 @@
 import React, {useState, useRef} from 'react'
 import PropTypes from 'prop-types'
+import {connect} from 'react-redux'
+
+import {spotifySearchArtists, addUserArtist} from 'redux/actions'
 
 import ModalPanel from 'components/ModalPanel'
-import Text from 'components/widgets/Text'
+import Text from 'components/shared/widgets/Text'
 import ArtistRow from 'components/shared/ArtistRow'
 
 import SearchIcon from 'icons/search.svg'
 
-import styles from './styles.scss'
+import styles from './AddArtistsModal.scss'
 
 const AddArtistsModal = props => {
   const {children, loadingSpotifyArtists, spotifyArtists, userArtists, addToUserList} = props
@@ -72,4 +75,25 @@ AddArtistsModal.propTypes = {
   children:              PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
 }
 
-export default AddArtistsModal
+const mapStateToProps = state => {
+  return {
+    loadingSpotifyArtists: state.spotify.artists.loading,
+    spotifyArtists:        state.spotify.artists.list,
+    userArtists:           state.userArtists,
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    spotifySearchArtist: searchText => {
+      dispatch(spotifySearchArtists(searchText))
+    },
+    addToUserList: artist => {
+      dispatch(addUserArtist(artist.id, artist))
+    },
+  }
+}
+
+const AddArtistsModalContainer = connect(mapStateToProps, mapDispatchToProps)(AddArtistsModal)
+
+export default AddArtistsModalContainer

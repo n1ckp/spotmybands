@@ -95,7 +95,7 @@ if (prod) {
   }
 }
 else {
-  config.devtool = 'eval'
+  config.devtool = 'source-map'
   config.plugins.push(new webpack.HotModuleReplacementPlugin())
 
   config.devServer = {

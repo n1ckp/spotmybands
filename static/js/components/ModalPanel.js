@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 import CloseIcon from 'icons/close.svg'
 
-import styles from './styles.scss'
+import styles from './ModalPanel.scss'
 
 const ModalPanel = props => {
   const {open, children, onClose} = props

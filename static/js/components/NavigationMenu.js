@@ -7,7 +7,7 @@ import LogoImage from 'logo.svg'
 import ArtistsImage from 'icons/nav/list-items.svg'
 import InfoImage from 'icons/nav/info.svg'
 
-import styles from './styles.scss'
+import styles from './NavigationMenu.scss'
 
 
 const NavigationMenu = props => {

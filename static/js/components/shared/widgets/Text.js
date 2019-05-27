@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import styles from './styles.scss'
+import styles from './Text.scss'
 
 export default class Text extends React.Component {
   constructor(props) {

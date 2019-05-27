@@ -1,9 +1,10 @@
 import React, {useState} from 'react'
 import PropTypes from 'prop-types'
+import {connect} from 'react-redux'
 import format from 'date-fns/format'
 import {withGoogleMap, GoogleMap, Marker, InfoWindow} from 'react-google-maps'
 
-import styles from './styles.scss'
+import styles from './SMBGoogleMap.scss'
 
 const MapWrapper = withGoogleMap((props) => {
   const [selectedEvent, setSelectedEvent] = useState(undefined)
@@ -57,4 +58,21 @@ SMBGoogleMap.propTypes = {
   selectedEvent: PropTypes.string,
 }
 
-export default SMBGoogleMap
+const mapStateToProps = state => {
+  const events = []
+
+  Object.values(state.events).forEach(artistEvents => {
+    if (!artistEvents.hidden) {
+      events.push(...artistEvents.events)
+    }
+  })
+
+  return {
+    events,
+  }
+}
+
+const SMBGoogleMapContainer = connect(mapStateToProps)(SMBGoogleMap)
+
+export default SMBGoogleMapContainer
+
