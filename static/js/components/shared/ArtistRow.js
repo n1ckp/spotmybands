@@ -8,6 +8,7 @@ import styles from './ArtistRow.scss'
 
 import Button from 'components/shared/widgets/Button'
 import DeleteIcon from 'icons/delete.svg'
+import LoadingOverlay from 'components/shared/widgets/LoadingOverlay'
 
 
 const ArtistRow = props => {
@@ -45,25 +46,27 @@ const ArtistRow = props => {
   }
 
   return (
-    <div id={styles.container} className={classNames.join(' ')}>
-      <span className={styles.icon} style={{backgroundImage: `url(${artist.logoURL})`}}></span>
-      <div className={styles.info}>
-        <h2>{artist.name}</h2>
-        {
-          !onUserList &&
+    <LoadingOverlay active={fetchingEvents}>
+      <div id={styles.container} className={classNames.join(' ')}>
+        <span className={styles.icon} style={{backgroundImage: `url(${artist.logoURL})`}}></span>
+        <div className={styles.info}>
+          <h2>{artist.name}</h2>
+          {
+            !onUserList &&
           artist.genres &&
           <div className={styles.genres}>
             {artist.genres.map((genre, i) => {
               return <span key={i}>{genre}</span>
             })}
           </div>
-        }
+          }
+        </div>
+        <div className={styles.actions}>
+          {button}
+          {removeButton}
+        </div>
       </div>
-      <div className={styles.actions}>
-        {button}
-        {removeButton}
-      </div>
-    </div>
+    </LoadingOverlay>
   )
 }
 

@@ -4,3 +4,25 @@
   -o-transition: $duration $type;
   transition: $duration $type;
 }
+
+@mixin make-keyframes($name) {
+  @-webkit-keyframes #{$name} {
+    @content;
+  }
+  @-moz-keyframes #{$name} {
+    @content;
+  }
+  @-ms-keyframes #{$name} {
+    @content;
+  }
+  @keyframes #{$name} {
+    @content;
+  }
+}
+
+
+@mixin set-animation($name, $duration, $type) {
+  -webkit-animation: $name $duration ease $type;
+  -moz-animation: $name $duration ease $type;
+  animation: $name $duration ease $type;
+}

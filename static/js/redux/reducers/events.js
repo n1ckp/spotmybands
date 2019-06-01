@@ -1,7 +1,12 @@
-import {FETCH_ARTIST_EVENTS, RECEIVED_ARTIST_EVENTS, TOGGLE_ARTIST_EVENTS} from '../actions'
+import {
+  FETCH_ARTIST_EVENTS, RECEIVED_ARTIST_EVENTS, TOGGLE_ARTIST_EVENTS,
+  REMOVE_USER_ARTIST,
+} from '../actions'
+
+import {save, load} from 'util/storage'
 
 const getInitialState = () => {
-  return {}
+  return load('userEvents') || {}
 }
 
 export default function events(state = getInitialState(), action) {
@@ -28,6 +33,11 @@ export default function events(state = getInitialState(), action) {
       events:  updatedState[action.artistID].events,
     }
   }
+  else if (action.type === REMOVE_USER_ARTIST) {
+    delete updatedState[action.artistID]
+  }
+
+  save('userEvents', updatedState)
 
   return updatedState
 }
