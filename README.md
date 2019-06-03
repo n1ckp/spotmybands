@@ -20,6 +20,8 @@ SPOTIFY_CLIENT_ID = "<key>"
 SPOTIFY_CLIENT_SECRET = "<key>"
 ```
 
+In order to set API keys as environment variables in your Heroku project for production, I've made a handy script. Simply run `python set_heroku_keys.py`
+
 ```
 make server # Runs Django backend
 
