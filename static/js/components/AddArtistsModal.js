@@ -2,7 +2,7 @@ import React, {useState, useRef, useEffect} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 
-import {spotifySearchArtists, addUserArtist} from 'redux/actions'
+import {spotifySearchArtists, addUserArtist, clearSpotifyArtists} from 'redux/actions'
 
 import ModalPanel from 'components/ModalPanel'
 import Text from 'components/shared/widgets/Text'
@@ -15,7 +15,6 @@ import styles from './AddArtistsModal.scss'
 const AddArtistsModal = props => {
   const {children, loadingSpotifyArtists, spotifyArtists, userArtists, addToUserList} = props
   const [open, setModalOpen] = useState(false)
-  const [artistSearchText, setArtistSearchText] = useState('')
   const artistSearch = useRef()
   const searchTextEl = useRef()
 
@@ -25,12 +24,11 @@ const AddArtistsModal = props => {
     }
   }, [open])
 
-  const onChangeArtistSearch = text => {
+  const handleChangeArtistSearch = text => {
     clearTimeout(artistSearch.current)
     artistSearch.current = setTimeout(() => {
       props.spotifySearchArtist(text)
     }, 500)
-    setArtistSearchText(text)
   }
 
   let artistSearchResults
@@ -61,7 +59,7 @@ const AddArtistsModal = props => {
           <div className={styles.actions}>
             <Text
               placeholder='Search for Artist...'
-              onChange={text => onChangeArtistSearch(text)}
+              onChange={text => handleChangeArtistSearch(text)}
               icon={<SearchIcon />}
               ref={searchTextEl} />
           </div>
@@ -94,7 +92,12 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     spotifySearchArtist: searchText => {
-      dispatch(spotifySearchArtists(searchText))
+      if (searchText && searchText !== '') {
+        dispatch(spotifySearchArtists(searchText))
+      }
+      else {
+        dispatch(clearSpotifyArtists())
+      }
     },
     addToUserList: artist => {
       dispatch(addUserArtist(artist.id, artist))

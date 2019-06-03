@@ -1,10 +1,10 @@
-import {SPOTIFY_ARTIST_SEARCH__BEGIN, SPOTIFY_ARTIST_SEARCH__END} from '../actions'
+import {SPOTIFY_ARTIST_SEARCH__BEGIN, SPOTIFY_ARTIST_SEARCH__END, CLEAR_SPOTIFY_ARTISTS} from '../actions'
 
 const getInitialState = () => {
   return {
     artists: {
       loading: false,
-      list: undefined,
+      list:    undefined,
     },
   }
 }
@@ -17,6 +17,10 @@ const spotify = (state=getInitialState(), action) => {
   }
   else if (action.type === SPOTIFY_ARTIST_SEARCH__END) {
     updatedState.artists.list = action.artists
+    updatedState.artists.loading = false
+  }
+  else if (action.type === CLEAR_SPOTIFY_ARTISTS) {
+    updatedState.artists.list = []
     updatedState.artists.loading = false
   }
 
