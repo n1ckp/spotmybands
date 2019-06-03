@@ -1,4 +1,4 @@
-import React, {useState, useRef} from 'react'
+import React, {useState, useRef, useEffect} from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 
@@ -17,6 +17,13 @@ const AddArtistsModal = props => {
   const [open, setModalOpen] = useState(false)
   const [artistSearchText, setArtistSearchText] = useState('')
   const artistSearch = useRef()
+  const searchTextEl = useRef()
+
+  useEffect(() => {
+    if (open) {
+      searchTextEl.current.focus()
+    }
+  }, [open])
 
   const onChangeArtistSearch = text => {
     clearTimeout(artistSearch.current)
@@ -55,7 +62,8 @@ const AddArtistsModal = props => {
             <Text
               placeholder='Search for Artist...'
               onChange={text => onChangeArtistSearch(text)}
-              icon={<SearchIcon />} />
+              icon={<SearchIcon />}
+              ref={searchTextEl} />
           </div>
           <div className={styles.artistsContainer}>
             {artistSearchResults}
