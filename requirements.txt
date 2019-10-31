@@ -1,4 +1,4 @@
 django-heroku
 gunicorn==19.9.0
 Django==2.0.12
-requests==2.19.1
+requests==2.20.0
