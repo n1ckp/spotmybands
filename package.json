@@ -4,12 +4,13 @@
   "engines": {
     "node": "10.15.3"
   },
+  "repository": "https://github.com/n1ckp/spotmybands",
   "description": "The place for quickly spotting events for the bands you listen to",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "NODE_ENV=production webpack",
-    "dev": "webpack-dev-server --config webpack.config.js --host 0.0.0.0",
+    "start": "webpack-dev-server --config webpack.config.js --host 0.0.0.0",
     "heroku-postbuild": "npm install && npm run build",
     "storybook": "start-storybook"
   },
@@ -41,14 +42,14 @@
     "eslint-plugin-react": "^7.12.4",
     "isomorphic-fetch": "^2.2.1",
     "node-sass": "^4.11.0",
+    "pigeon-maps": "^0.14.0",
     "prop-types": "^15.7.2",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
-    "react-google-maps": "^9.4.5",
     "react-redux": "^6.0.1",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
-    "react-svg-loader": "^2.1.0",
+    "react-svg-loader": "^3.0.3",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
     "sass-loader": "^7.1.0",

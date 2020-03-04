@@ -1,7 +1,7 @@
 import React from 'react'
 
 import NavigationMenu from 'components/NavigationMenu'
-import SMBGoogleMap from 'components/SMBGoogleMap'
+import StreetMap from './StreetMap'
 
 import styles from './SpotMyBandsApp.scss'
 
@@ -9,7 +9,7 @@ const SpotMyBandsApp = () => {
   return (
     <div id={styles.container}>
       <NavigationMenu />
-      <SMBGoogleMap />
+      <StreetMap />
     </div>
   )
 }
