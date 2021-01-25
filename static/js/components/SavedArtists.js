@@ -17,7 +17,7 @@ const SavedArtists = props => {
   const [filterText, setFilterText] = useState('')
 
   const filteredArtists = Object.values(props.artists).filter(a => a.name.toLowerCase().match(filterText.toLowerCase()))
-  const hasArtists = props.artists.length > 0
+  const hasArtists = Object.values(props.artists).length > 0
   const hasVisibleArtists = filteredArtists.length > 0
 
   const artistTable = (
