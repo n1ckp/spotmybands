@@ -30,10 +30,10 @@ const SavedArtists = props => {
     <div id={styles.container}>
       <h1>Your Artists</h1>
       <div className={styles.actions}>
-        <Text
+        {filteredArtists.length > 0 && <Text
           placeholder='Search for Artist...'
           onChange={text => setFilterText(text)}
-          icon={<SearchIcon />} />
+          icon={<SearchIcon />} />}
         <AddArtistsModal>
           <Button type='primary' className={styles.button}>Add Artists</Button>
         </AddArtistsModal>
