@@ -22,5 +22,10 @@
     height: calc(100vh - 156px);
     background-color: $colour-lighter-grey;
     border: solid 1px $colour-light-grey;
+    > p {
+      padding: 8px;
+      width: 100%;
+      text-align: center;
+    }
   }
 }

@@ -33,6 +33,9 @@
           &.selected {
             fill: $colour-purple;
           }
+          &:first-child {
+            padding-top: 0;
+          }
         }
       }
     }

@@ -17,12 +17,20 @@ const SavedArtists = props => {
   const [filterText, setFilterText] = useState('')
 
   const filteredArtists = Object.values(props.artists).filter(a => a.name.toLowerCase().match(filterText.toLowerCase()))
+  const hasArtists = props.artists.length > 0
+  const hasVisibleArtists = filteredArtists.length > 0
 
   const artistTable = (
     <div className={styles.artistsContainer}>
-      {filteredArtists.map((artist, index) => {
-        return <ArtistRow key={index} artist={artist} onUserList={true} />
-      })}
+      {
+        hasVisibleArtists ?
+          filteredArtists.map((artist, index) => {
+            return <ArtistRow key={index} artist={artist} onUserList={true} />
+          })
+          :
+          hasArtists ?
+            <p>No artists visible using current search</p> :
+            <p>No saved artists, please add using the button above.</p>}
     </div>
   )
 
@@ -35,7 +43,7 @@ const SavedArtists = props => {
           onChange={text => setFilterText(text)}
           icon={<SearchIcon />} />}
         <AddArtistsModal>
-          <Button type='primary' className={styles.button}>Add Artists</Button>
+          <Button type='primary' className={styles.button}>Add</Button>
         </AddArtistsModal>
       </div>
       {artistTable}

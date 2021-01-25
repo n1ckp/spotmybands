@@ -3,7 +3,6 @@ import React, {useState} from 'react'
 import SavedArtists from 'components/SavedArtists'
 import InfoPanel from 'components/InfoPanel'
 
-import LogoImage from 'logo.svg'
 import ArtistsImage from 'icons/nav/list-items.svg'
 import InfoImage from 'icons/nav/info.svg'
 
@@ -32,7 +31,6 @@ const NavigationMenu = props => {
     <div id={styles.container}>
       <div className={styles.inner}>
         <div className={styles.gutter}>
-          <LogoImage onClick={() => setSelected('artists')} width={40} height={49} className={styles.logo} />
           <div className={styles.navOptions}>
             <div className={selected === 'artists' ? styles.selected : null} onClick={() => setSelected('artists')}>
               <ArtistsImage />
