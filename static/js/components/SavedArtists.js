@@ -38,7 +38,7 @@ const SavedArtists = props => {
     <div id={styles.container}>
       <h1>Your Artists</h1>
       <div className={styles.actions}>
-        {hasArtists > 0 && <Text
+        {hasArtists && <Text
           placeholder='Search for Artist...'
           onChange={text => setFilterText(text)}
           icon={<SearchIcon />} />}
