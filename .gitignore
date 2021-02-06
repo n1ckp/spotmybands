@@ -6,8 +6,8 @@ venv
 *.pyc
 npm-debug.log
 
-# Webpack
-static/built
+# build folder
+/built
 
 # keys
 keys.py

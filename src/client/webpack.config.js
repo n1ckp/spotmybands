@@ -6,7 +6,7 @@ var mode = process.env.NODE_ENV || 'development'
 var TerserPlugin = require('terser-webpack-plugin')
 
 var CLIENT_PATH = __dirname
-var BUILD_PATH = path.join(__dirname, 'built')
+var BUILD_PATH = path.join(__dirname, '../../built/client')
 
 var config = {
   cache: true,

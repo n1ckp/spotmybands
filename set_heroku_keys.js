@@ -1,4 +1,4 @@
-const keys = require('./keys.json')
+const keys = require('./src/server/keys.json')
 const {exec} = require('child_process')
 
 let command = 'heroku config:set'

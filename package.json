@@ -12,8 +12,10 @@
     "build:client": "NODE_ENV=production webpack --config ./src/client/webpack.config.js",
     "start:client-dev": "webpack-dev-server --config ./src/client/webpack.config.js --host 0.0.0.0",
     "build:server": "tsc --p ./src/server",
+    "start": "node ./built/server/server.js",
     "start:server-dev": "ts-node --project ./src/server/tsconfig.json ./src/server/server",
-    "heroku-postbuild": "npm install && npm run build",
+    "copy:assets": "node ./copyAssets.js",
+    "heroku-postbuild": "npm install && npm run build:server && npm run build:client && npm run copy:assets",
     "storybook": "start-storybook"
   },
   "keywords": [
@@ -65,6 +67,7 @@
     "@types/express": "^4.17.11",
     "@types/node": "^14.14.25",
     "express": "^4.17.1",
+    "fs-extra": "^9.1.0",
     "hbs": "^4.1.1",
     "morgan": "^1.10.0",
     "node-fetch": "^2.6.1",
