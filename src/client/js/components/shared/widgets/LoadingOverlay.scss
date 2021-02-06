@@ -1,0 +1,29 @@
+@import "base-styles";
+
+@include make-keyframes(Shine) {
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+
+#container {
+  position: relative;
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    opacity: 0;
+    background: linear-gradient(270deg, #ffffff 0%, #2e2e2e 45%, #2e2e2e 55%, #ffffff 100%);
+    background-size: 400% 400%;
+    pointer-events: none;
+    @include base-transition(0.2s);
+  }
+  &.active {
+    .overlay {
+      opacity: 0.4;
+      @include set-animation(Shine, 1s, infinite);
+    }
+  }
+}

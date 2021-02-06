@@ -5,19 +5,19 @@ var prod = env === 'production'
 var mode = process.env.NODE_ENV || 'development'
 var TerserPlugin = require('terser-webpack-plugin')
 
-var STATIC_PATH = path.join(__dirname, 'static')
+var CLIENT_PATH = __dirname
+var BUILD_PATH = path.join(__dirname, 'build')
 
 var config = {
   cache: true,
   entry: {
     'main-app': [
-      'babel-polyfill',
-      path.join(STATIC_PATH, 'js', 'app.js'),
+      path.join(CLIENT_PATH, 'js', 'app.js'),
     ],
   },
   mode:   mode,
   output: {
-    path:       path.join(STATIC_PATH, 'built'),
+    path:       BUILD_PATH,
     publicPath: '/static/built/',
     filename:   '[name].chunk.js',
   },
@@ -27,9 +27,9 @@ var config = {
   ],
   resolve: {
     modules: [
-      path.join(STATIC_PATH, 'sass'),
-      path.join(STATIC_PATH, 'images'),
-      path.join(STATIC_PATH, 'js'),
+      path.join(CLIENT_PATH, 'sass'),
+      path.join(CLIENT_PATH, 'images'),
+      path.join(CLIENT_PATH, 'js'),
       'node_modules',
     ],
     extensions: ['*', '.js'],
@@ -38,7 +38,7 @@ var config = {
     rules: [
       {
         test:    /\.jsx?$/,
-        include: path.join(STATIC_PATH, 'js'),
+        include: path.join(CLIENT_PATH, 'js'),
         use:     {
           loader:  'babel-loader',
           options: {
@@ -48,7 +48,7 @@ var config = {
       },
       {
         test:    /\.s?css$/,
-        include: path.join(STATIC_PATH),
+        include: path.join(CLIENT_PATH),
         use:     [
           'style-loader',
           {
@@ -60,23 +60,23 @@ var config = {
           },
           {
             loader:  'sass-loader',
-            options: {includePaths: [path.join(STATIC_PATH, 'sass')]},
+            options: {includePaths: [path.join(CLIENT_PATH, 'sass')]},
           },
         ],
       },
       {
         test:    /\.svg/,
-        include: path.join(STATIC_PATH, 'images'),
+        include: path.join(CLIENT_PATH, 'images'),
         loader:  'react-svg-loader',
       },
       {
         test:    /\.(png|gif|jpg|ttf|woff|eot)/,
-        include: path.join(STATIC_PATH, 'images'),
+        include: path.join(CLIENT_PATH, 'images'),
         loader:  'url-loader',
       },
       {
         test:    /\.json$/,
-        include: path.join(STATIC_PATH, 'js'),
+        include: path.join(CLIENT_PATH, 'js'),
         loader:  'json-loader',
       },
     ],
@@ -99,7 +99,7 @@ else {
   config.plugins.push(new webpack.HotModuleReplacementPlugin())
 
   config.devServer = {
-    contentBase: '/static/built/',
+    contentBase: BUILD_PATH,
     port:        3000,
     proxy:       {
       '*': 'http://localhost:8000',

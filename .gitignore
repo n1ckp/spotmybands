@@ -12,3 +12,4 @@ static/built
 # keys
 keys.py
 keys_dev.py
+keys.json
