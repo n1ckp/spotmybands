@@ -11,7 +11,7 @@ export const apiFetch = (path, postData) => {
   if (postData) {
     params.method = 'POST'
     params.body = JSON.stringify({
-      access_token: appData.SpotifyAccessToken,
+      accessToken: appData.accessToken,
       ...postData,
     })
   }

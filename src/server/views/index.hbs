@@ -10,10 +10,10 @@
 </head>
 <body>
   <div id="app-root"></div>
-  <script src="https://maps.googleapis.com/maps/api/js?key={{ appData.keys.GoogleMapsAPIKey }}"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key={{ appData.keys.GOOGLE_MAPS_API }}"></script>
   <script src="/built/main-app.chunk.js"></script>
   <script type="text/javascript">
-  var appData = {{{ appData }}}
+  var appData = {{{ appDataString }}}
   var csrfToken = '{{ csrf_token }}'
   </script>
 </body>
