@@ -30,7 +30,7 @@ app.get('/', async (req, res) => {
   res.render('index', { appData, appDataString });
 });
 app.post('/api/artist-search', artistSearch);
-app.post('/api/artist-events', artistEvents);
+app.get('/api/artist-events', artistEvents);
 app.post('/api/spotify-auth', spotifyAuth);
 
 app.listen(PORT, () => {

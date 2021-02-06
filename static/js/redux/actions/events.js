@@ -8,7 +8,7 @@ export const fetchArtistEvents = (artistName, artistID) => {
   return dispatch => {
     dispatch({type: FETCH_ARTIST_EVENTS, artistID})
 
-    return apiFetch(`/artist-events/?artist_name=${encodeURI(artistName)}`)
+    return apiFetch(`/artist-events/?artistName=${encodeURI(artistName)}`)
       .then(response => response.json())
       .then(data => {
         dispatch({

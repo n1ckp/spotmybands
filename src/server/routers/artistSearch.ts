@@ -38,7 +38,7 @@ const router = async (req, res) => {
   const artists = response.artists.items.map(a => ({
     id: a.id,
     name: a.name,
-    logoURL: a.images ? a.images[0].url : undefined,
+    logoURL: (a.images && a.images.length) ? a.images[0].url : undefined,
     genres: a.genres,
   }))
 
