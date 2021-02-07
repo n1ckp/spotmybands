@@ -2,10 +2,14 @@
 
 #container {
   padding: 48px;
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100vh - 96px);
   .actions {
-
+    flex: none;
   }
   .artistsContainer {
-
+    overflow-y: scroll;
+    flex: 1;
   }
 }
