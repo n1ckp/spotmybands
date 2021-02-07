@@ -18,7 +18,7 @@ var config = {
   mode:   mode,
   output: {
     path:       BUILD_PATH,
-    publicPath: '/built/',
+    publicPath: '/',
     filename:   '[name].chunk.js',
   },
   plugins: [
