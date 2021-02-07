@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>SpotMyBands</title>
+  <meta name="description" content="Spot the bands you listen to, the easy way.">
+  <meta name="author" content="Nick Phillips">
+  <link rel="shortcut icon" href="images/favicon.ico">
+  <link href="https://fonts.googleapis.com/css?family=Lato&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div id="app-root"></div>
+  <script src="main-app.chunk.js"></script>
+  <script type="text/javascript">
+  var appData = {{{ appDataString }}}
+  var csrfToken = '{{ csrf_token }}'
+  </script>
+</body>
+</html>
