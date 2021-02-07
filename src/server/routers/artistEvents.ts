@@ -30,11 +30,7 @@ const router = async (req, res) => {
   const eventsData = await fetchEvents(args);
   const artistEventsData = eventsData.resultsPage.results.event
 
-  if (eventsData.resultsPage.totalEntries == 0 || !artistEventsData) {
-    res.json([])
-  }
-
-  const artistEvents = artistEventsData.map(event => {
+  const artistEvents = (artistEventsData || []).map(event => {
     const venue: VenueData = {
       name: event.venue.displayName,
     }

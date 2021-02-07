@@ -4,9 +4,10 @@ import {
 } from '../actions'
 
 import {save, load} from 'util/storage'
+import {sanitiseArtistEvents} from 'util/sanitise'
 
 const getInitialState = () => {
-  return load('userEvents') || {}
+  return sanitiseArtistEvents(load('userEvents'))
 }
 
 export default function events(state = getInitialState(), action) {
