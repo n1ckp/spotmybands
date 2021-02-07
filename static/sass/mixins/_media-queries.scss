@@ -1,5 +1,0 @@
-@mixin tablet {
-  @media (max-width: $width-tablet + 64px) {
-    @content;
-  }
-}
