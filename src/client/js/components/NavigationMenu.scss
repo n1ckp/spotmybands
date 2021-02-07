@@ -5,6 +5,7 @@
   display: inline-block;
   box-shadow: 2px 0 2px 0 $colour-light-grey;
   width: 50%;
+  z-index: index($zIndex, navpanel);
   .inner {
     display: flex;
     .gutter {

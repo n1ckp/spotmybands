@@ -47,10 +47,9 @@ const StreetMap = ({markers}) => {
               onClick={() => setSelectedMarkerIndex(selectedMarkerIndex === i ? undefined : i)}
               open={selectedMarkerIndex === i}
               onCloseInfoBox={() => setSelectedMarkerIndex(undefined)}>
-              <h3>{marker.name}</h3>
+              <a href={marker.songkickURL} target="_blank" rel="noopener noreferrer"><h3>{marker.name}</h3></a>
               <p><b>{marker.artist}</b></p>
               <p>{marker.date ? format(Date.parse(marker.date), 'dddd Do MMMM YYYY') : null}</p>
-              <a href={marker.songkickURL} target="_blank" rel="noopener noreferrer">{marker.songkickURL}</a>
             </Marker>
           )
         })}

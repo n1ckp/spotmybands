@@ -1,3 +1,5 @@
+@import 'base-styles';
+
 .container {
   width: 50%;
   height: calc(100vh - 4px);
@@ -8,26 +10,30 @@
   .icon {
     width: 24px;
     height: 24px;
+    transform: translateY(-50%);
   }
   .infoBox {
     display: block;
     position: absolute;
-    bottom: 60px;
+    bottom: 44px;
     width: 400px;
     height: 175px;
     padding: 16px;
     background-color: white;
     border-radius: 4px;
-    transform: translateX(-50%);
-    .closeButton {
+    border: solid 3px $colour-purple;
+    transform: translateX(-48%);
+    z-index: index($zIndex, infobox);
+    .close {
       outline: none;
       border:none;
       -webkit-appearance: none;
       background: none;
-      svg {
-        width: 16px;
-        height: 16px;
-      }
+      padding: 0;
+      margin-left: -5px;
+    }
+    a {
+      color: $colour-purple;
     }
   }
 }
