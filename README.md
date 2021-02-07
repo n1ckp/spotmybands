@@ -1,41 +1,53 @@
-# SpotMyBands #
+# SpotMyBands 🎸
 
-The place for quickly spotting events for the bands you listen to
+The place for quickly spotting events for the bands you listen to.
+
+Uses [Spotify](https://developer.spotify.com/) and [Songkick](https://www.songkick.com/developer) developer APIs.
+
+Express for backend, React for frontend.
 
 ---
 
-### Local Development ###
+## Local Development
 
-You must first set keys for the project (not checked into this repo for obvious reasons)
+### 1. Obtain and set API keys
 
-## API keys ##
+- Go to https://developer.spotify.com/ and obtain Client ID and Client Secret API keys.
+- Go to https://www.songkick.com/developer and obtain an API key.
+- Add a `keys.json` file at `/src/server/keys.json` in the following format:
 
-Two api key files are required, one for development (`<project root>/spotmybands/keys_dev.py`) and one for production (`<project root>/keys.py`) each containing the following:
-
-```python
-DJANGO_SECRET_KEY = '<key>'
-GOOGLE_MAPS_API_KEY = "<key>"
-SONGKICK_API_KEY = "<key>"
-SPOTIFY_CLIENT_ID = "<key>"
-SPOTIFY_CLIENT_SECRET = "<key>"
+```json
+{
+  "prod": {
+    "SONGKICK_API_KEY": "<key>",
+    "SPOTIFY_CLIENT_ID": "<key>",
+    "SPOTIFY_CLIENT_SECRET": "<key>"
+  },
+  "dev": {
+    "SONGKICK_API_KEY": "<key>",
+    "SPOTIFY_CLIENT_ID": "<key>",
+    "SPOTIFY_CLIENT_SECRET": "<key>"
+  }
+}
 ```
 
-In order to set API keys as environment variables in your Heroku project for production, I've made a handy script. Simply run `python set_heroku_keys.py`
+- In order to set API keys as environment variables in your Heroku project for production, I've made a handy script. Simply run `npm run heroku:setkeys`
 
-## Local Development ##
+### 2. Run server and client in separate terminal processes
 
 ```
-make server # Runs Django backend
+make server # Runs Express server backend
 
-make client # Runs webpack dev server for react app. Default port is 3000
+make client # Runs webpack dev server for React app.
 ```
 
-## Deploying to Heroku ##
+And you're away 🚀
 
-1. Ensure you have the Heroku CLI installed, and go to project root.
+## Deploying to Heroku
+
+1. Ensure you have a Heroku account and the Heroku CLI installed, then go to project root.
 2. `heroku login`
 2. `heroku create`
-3. `heroku buildpacks:set heroku/python`
-4. `heroku buildpacks:add heroku/nodejs`
+3. `heroku buildpacks:set heroku/nodejs`
 5. `git push heroku master`
-6. `heroku open`
+6. `heroku open` to see your deployed dyno

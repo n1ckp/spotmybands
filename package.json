@@ -14,9 +14,10 @@
     "build:server": "tsc --p ./src/server",
     "start": "node ./built/server/server.js",
     "start:server-dev": "ts-node --project ./src/server/tsconfig.json ./src/server/server",
-    "copy:assets": "node ./copyAssets.js",
+    "copy:assets": "node ./scripts/copyAssets.js",
     "heroku-postbuild": "npm install && npm run build:server && npm run build:client && npm run copy:assets",
-    "storybook": "start-storybook"
+    "storybook": "start-storybook",
+    "heroku:setkeys": "node ./scripts/setHerokuKeys.js"
   },
   "keywords": [
     "Spotify",
