@@ -7,7 +7,7 @@ import artistEvents from './routers/artistEvents';
 import spotifyAuth from './spotifyAuth';
 import { KEYS } from './utils';
 
-const PORT = 8000;
+const PORT = process.env.PORT || 8000;
 
 const app = express();
 
