@@ -1,6 +1,10 @@
 # SpotMyBands 🎸
 
+**[spotmybands.n1ck.dev](https://spotmybands.n1ck.dev/)**
+
 The place for quickly spotting events for the bands you listen to.
+
+
 
 Uses [Spotify](https://developer.spotify.com/) and [Songkick](https://www.songkick.com/developer) developer APIs.
 
