@@ -21,10 +21,10 @@ var config = {
     publicPath: '/',
     filename:   '[name].chunk.js',
   },
-  plugins: [
-    new webpack.NoEmitOnErrorsPlugin(),
-    new webpack.NamedModulesPlugin(),
-  ],
+  optimization: {
+    moduleIds:    'named',
+    emitOnErrors: false,
+  },
   resolve: {
     modules: [
       path.join(CLIENT_PATH, 'sass'),
@@ -84,11 +84,11 @@ var config = {
 }
 
 if (prod) {
-  config.plugins.push(new webpack.DefinePlugin({
+  config.plugins = [new webpack.DefinePlugin({
     'process.env': {
       'NODE_ENV': '"production"',
     },
-  }))
+  })]
 
   config.optimization = {
     minimizer: [new TerserPlugin()],
@@ -96,7 +96,7 @@ if (prod) {
 }
 else {
   config.devtool = 'source-map'
-  config.plugins.push(new webpack.HotModuleReplacementPlugin())
+  config.plugins = [new webpack.HotModuleReplacementPlugin()]
 
   config.devServer = {
     contentBase: BUILD_PATH,
