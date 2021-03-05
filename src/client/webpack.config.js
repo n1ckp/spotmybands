@@ -18,7 +18,7 @@ var config = {
   mode:   mode,
   output: {
     path:       BUILD_PATH,
-    publicPath: '/',
+    publicPath: '/assets',
     filename:   '[name].chunk.js',
   },
   optimization: {
@@ -54,13 +54,18 @@ var config = {
           {
             loader:  'css-loader',
             options: {
-              modules:        true,
-              localIdentName: '[path]___[name]__[local]___[hash:base64:5]',
+              modules: {
+                localIdentName: '[path]___[name]__[local]___[hash:base64:5]',
+              },
             },
           },
           {
-            loader:  'sass-loader',
-            options: {includePaths: [path.join(CLIENT_PATH, 'sass')]},
+            loader:  'sass-loader', // Fixed at v10 because v11 not working with Storybook
+            options: {
+              sassOptions: {
+                includePaths: [path.join(CLIENT_PATH, 'sass')],
+              },
+            },
           },
         ],
       },
@@ -81,14 +86,15 @@ var config = {
       },
     ],
   },
+  plugins: [],
 }
 
 if (prod) {
-  config.plugins = [new webpack.DefinePlugin({
+  config.plugins.push(new webpack.DefinePlugin({
     'process.env': {
       'NODE_ENV': '"production"',
     },
-  })]
+  }))
 
   config.optimization = {
     minimizer: [new TerserPlugin()],
@@ -96,7 +102,7 @@ if (prod) {
 }
 else {
   config.devtool = 'source-map'
-  config.plugins = [new webpack.HotModuleReplacementPlugin()]
+  config.plugins.push(new webpack.HotModuleReplacementPlugin())
 
   config.devServer = {
     contentBase: BUILD_PATH,
@@ -110,8 +116,7 @@ else {
     historyApiFallback: true,
     hot:                true,
   }
-
-  config.module.rules[1].use[0] = 'style-loader?sourceMap'
+  config.module.rules[1].use[1].options.sourceMap = true
   config.module.rules[1].use[2].options.sourceMap = true
 }
 

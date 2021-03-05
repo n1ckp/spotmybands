@@ -15,7 +15,8 @@ app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, '/views'));
 
 app.use(morgan('combined'))
-app.use(express.static(path.join(__dirname, '../client')));
+app.use('/assets', express.static(path.join(__dirname, '../client')));
+app.use('/storybook', express.static(path.join(__dirname, '../../built/storybook')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
