@@ -1,10 +1,15 @@
 @import 'base-styles';
 
 #container {
-  margin-top: 48px;
+  margin-top: 24px;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  h1 {
+    font-size: 24px;
+    font-weight: normal;
+    color: #191923;
+    margin-bottom: 24px;
+  }
   p {
     margin-bottom: 24px;
     a {
@@ -14,6 +19,7 @@
   }
   .spotify {
     width: 200px;
+    margin-right: 16px;
   }
   .songkick {
     margin: 12px 0 0 0;
