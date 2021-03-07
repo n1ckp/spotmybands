@@ -1,17 +1,35 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import {connect} from 'react-redux'
+import * as React from 'react'
+import { connect } from 'react-redux'
 
-import {fetchArtistEvents, toggleArtistEvents, removeUserArtist} from 'redux/actions'
+import { fetchArtistEvents, toggleArtistEvents, removeUserArtist } from '@redux/actions'
 
-import styles from './ArtistRow.scss'
+const styles = require('./ArtistRow.scss').default
 
-import Button from 'components/shared/widgets/Button'
-import DeleteIcon from 'icons/delete.svg'
-import LoadingOverlay from 'components/shared/widgets/LoadingOverlay'
+import Button from '@components/shared/widgets/Button'
+const DeleteIcon = require('@images/icons/delete.svg').default
+import LoadingOverlay from '@components/shared/widgets/LoadingOverlay'
 
+type ArtistData = {
+  id: string,
+  name: string,
+  logoURL?: string,
+  genres: string[],
+}
 
-const ArtistRow = props => {
+type ArtistRowProps = {
+  artist: ArtistData,
+  onUserList: boolean,
+  addToUserList: (artist: ArtistData) => void,
+  fetchArtistEvents: () => void,
+  eventsNotFetched: boolean,
+  eventsHidden: boolean,
+  toggleEvents: (eventsHidden: boolean) => void,
+  onRemoveArtist: () => void,
+  noEvents: boolean,
+  fetchingEvents: boolean,
+}
+
+const ArtistRow: React.FC<ArtistRowProps> = props => {
   const {
     artist, onUserList, addToUserList, fetchArtistEvents,
     toggleEvents, eventsNotFetched, eventsHidden,
@@ -48,17 +66,17 @@ const ArtistRow = props => {
   return (
     <LoadingOverlay active={fetchingEvents}>
       <div id={styles.container} className={classNames.join(' ')}>
-        <span className={styles.icon} style={{backgroundImage: `url(${artist.logoURL})`}}></span>
+        <span className={styles.icon} style={{ backgroundImage: `url(${artist.logoURL})` }}></span>
         <div className={styles.info}>
           <h2>{artist.name}</h2>
           {
             !onUserList &&
-          artist.genres &&
-          <div className={styles.genres}>
-            {artist.genres.map((genre, i) => {
-              return <span key={i}>{genre}</span>
-            })}
-          </div>
+            artist.genres &&
+            <div className={styles.genres}>
+              {artist.genres.map((genre, i) => {
+                return <span key={i}>{genre}</span>
+              })}
+            </div>
           }
         </div>
         <div className={styles.actions}>
@@ -70,21 +88,8 @@ const ArtistRow = props => {
   )
 }
 
-ArtistRow.propTypes = {
-  artist:            PropTypes.object.isRequired,
-  onUserList:        PropTypes.bool,
-  addToUserList:     PropTypes.func,
-  fetchArtistEvents: PropTypes.func,
-  eventsNotFetched:  PropTypes.bool,
-  eventsHidden:      PropTypes.bool,
-  toggleEvents:      PropTypes.func,
-  onRemoveArtist:    PropTypes.func,
-  noEvents:          PropTypes.bool,
-  fetchingEvents:    PropTypes.bool,
-}
-
 const mapStateToProps = (state, ownProps) => {
-  const {id} = ownProps.artist
+  const { id } = ownProps.artist
   const artistData = state.events[id]
 
   const fetchingEvents = artistData && artistData.loading
@@ -101,7 +106,7 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
-  const {name, id} = ownProps.artist
+  const { name, id } = ownProps.artist
 
   return {
     fetchArtistEvents: () => {

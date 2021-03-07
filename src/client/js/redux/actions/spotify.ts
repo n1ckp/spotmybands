@@ -1,4 +1,4 @@
-import {apiFetch} from 'util/settings'
+import {apiFetch} from '@utils/settings'
 
 export const SPOTIFY_ARTIST_SEARCH__BEGIN = 'SPOTIFY_ARTIST_SEARCH__BEGIN'
 export const SPOTIFY_ARTIST_SEARCH__END = 'SPOTIFY_ARTIST_SEARCH__END'

@@ -1,6 +1,6 @@
 import {FETCHED_USER_ARTISTS, ADD_USER_ARTIST, REMOVE_USER_ARTIST, CLEAR_USER_ARTISTS} from '../actions'
 
-import {save, load} from 'util/storage'
+import {save, load} from '@utils/storage'
 
 const getInitialState = () => {
   return load('userArtists') || {}

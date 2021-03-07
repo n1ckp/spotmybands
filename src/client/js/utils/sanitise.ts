@@ -1,4 +1,4 @@
-export const sanitiseArtistEvents = artistEventsObj => {
+export const sanitiseArtistEvents = (artistEventsObj: { [key: string]: any }) => {
   if (!artistEventsObj) {
     return {}
   }

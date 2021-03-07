@@ -1,17 +1,16 @@
-import React, {useState} from 'react'
+import * as React from 'react'
 
-import SavedArtists from 'components/SavedArtists'
-import InfoPanel from 'components/InfoPanel'
+import SavedArtists from '@components/SavedArtists'
+import InfoPanel from '@components/InfoPanel'
 
-import ArtistsImage from 'icons/nav/list-items.svg'
-import InfoImage from 'icons/nav/info.svg'
+const ArtistsImage = require('@images/icons/nav/list-items.svg').default
+const InfoImage = require('@images/icons/nav/info.svg').default
 
-import styles from './NavigationMenu.scss'
+const styles = require('./NavigationMenu.scss').default
 
-
-const NavigationMenu = props => {
-  const [panelOpen, setPanelOpen] = useState(true)
-  const [selected, setSelected] = useState('artists')
+export const NavigationMenu: React.FC = () => {
+  const [panelOpen, setPanelOpen] = React.useState(true)
+  const [selected, setSelected] = React.useState('artists')
 
   let classNames = [styles.panel]
   let selectedPanel

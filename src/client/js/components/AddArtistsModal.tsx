@@ -1,32 +1,44 @@
-import React, {useState, useRef, useEffect} from 'react'
-import PropTypes from 'prop-types'
-import {connect} from 'react-redux'
+import * as React from 'react'
+import { connect } from 'react-redux'
 
-import {spotifySearchArtists, addUserArtist, clearSpotifyArtists} from 'redux/actions'
+import { spotifySearchArtists, addUserArtist, clearSpotifyArtists } from '@redux/actions'
 
-import ModalPanel from 'components/ModalPanel'
-import Text from 'components/shared/widgets/Text'
-import ArtistRow from 'components/shared/ArtistRow'
+import ModalPanel from '@components/ModalPanel'
+import Text from '@components/shared/widgets/Text'
+import ArtistRow from '@components/shared/ArtistRow'
 
-import SearchIcon from 'icons/search.svg'
+const SearchIcon = require('@images/icons/search.svg').default
 
-import styles from './AddArtistsModal.scss'
+const styles = require('./AddArtistsModal.scss').default
 
-const AddArtistsModal = props => {
-  const {children, loadingSpotifyArtists, spotifyArtists, userArtists, addToUserList} = props
-  const [open, setModalOpen] = useState(false)
-  const artistSearch = useRef()
-  const searchTextEl = useRef()
+type SpotifyArtist = {
+  id: string,
+}
 
-  useEffect(() => {
+type AddArtistsModalProps = {
+  loadingSpotifyArtists: boolean,
+  userArtists: Object,
+  spotifyArtists: SpotifyArtist[],
+  addToUserList: (artist: Object) => void,
+  spotifySearchArtist: (searchText: string) => void,
+  children: React.ReactNode,
+}
+
+const AddArtistsModal: React.FC<AddArtistsModalProps> = props => {
+  const { children, loadingSpotifyArtists, spotifyArtists, userArtists, addToUserList } = props
+  const [open, setModalOpen] = React.useState(false)
+  const artistSearch = React.useRef(null)
+  const searchTextEl = React.useRef(null)
+
+  React.useEffect(() => {
     if (open) {
       searchTextEl.current.focus()
     }
   }, [open])
 
   const handleChangeArtistSearch = text => {
-    clearTimeout(artistSearch.current)
-    artistSearch.current = setTimeout(() => {
+    window.clearTimeout(artistSearch.current)
+    artistSearch.current = window.setTimeout(() => {
       props.spotifySearchArtist(text)
     }, 500)
   }
@@ -38,7 +50,7 @@ const AddArtistsModal = props => {
   }
   else if (spotifyArtists) {
     artistSearchResults = (
-      <div className={styles.artists}>
+      <div>
         {spotifyArtists.map((a, index) => {
           return <ArtistRow key={index}
             artist={a}
@@ -72,20 +84,11 @@ const AddArtistsModal = props => {
   )
 }
 
-AddArtistsModal.propTypes = {
-  loadingSpotifyArtists: PropTypes.bool,
-  userArtists:           PropTypes.object,
-  spotifyArtists:        PropTypes.array,
-  addToUserList:         PropTypes.func,
-  spotifySearchArtist:   PropTypes.func,
-  children:              PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
-}
-
 const mapStateToProps = state => {
   return {
     loadingSpotifyArtists: state.spotify.artists.loading,
-    spotifyArtists:        state.spotify.artists.list,
-    userArtists:           state.userArtists,
+    spotifyArtists: state.spotify.artists.list,
+    userArtists: state.userArtists,
   }
 }
 

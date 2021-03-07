@@ -1,12 +1,17 @@
-import React from 'react'
-import PropTypes from 'prop-types'
+import * as React from 'react'
 
-import CloseIcon from 'icons/close.svg'
+const CloseIcon = require('@images/icons/close.svg').default
 
-import styles from './ModalPanel.scss'
+const styles = require('./ModalPanel.scss').default
 
-const ModalPanel = props => {
-  const {open, children, onClose} = props
+type ModalPanelProps = {
+  open: boolean,
+  onClose: () => void,
+  children: React.ReactNode,
+}
+
+const ModalPanel: React.FC<ModalPanelProps> = (props) => {
+  const { open, children, onClose } = props
   let classNames = []
 
   if (open) {
@@ -26,12 +31,6 @@ const ModalPanel = props => {
       </div>
     </div>
   )
-}
-
-ModalPanel.propTypes = {
-  open:     PropTypes.bool.isRequired,
-  onClose:  PropTypes.func.isRequired,
-  children: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
 }
 
 export default ModalPanel

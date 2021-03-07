@@ -1,4 +1,4 @@
-import {apiFetch} from 'util/settings'
+import {apiFetch} from '@utils/settings'
 
 export const FETCH_ARTIST_EVENTS = 'FETCH_ARTIST_EVENTS'
 export const RECEIVED_ARTIST_EVENTS = 'RECEIVED_ARTIST_EVENTS'

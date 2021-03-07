@@ -1,6 +1,6 @@
-export const save = (key, value) => {
+export const save = (key: string, value: any) => {
   const timestamp = Date.now()
-  const expiry = Date.now() + 1000*60*60*24*365 // Set to expire in a year's time
+  const expiry = Date.now() + 1000 * 60 * 60 * 24 * 365 // Set to expire in a year's time
   const data = JSON.stringify({
     timestamp,
     expiry,
@@ -10,7 +10,7 @@ export const save = (key, value) => {
   window.localStorage.setItem(key, data)
 }
 
-export const load = (key, _default) => {
+export const load = (key: string, _default?: any) => {
   const result = window.localStorage.getItem(key)
 
   if (!result) {

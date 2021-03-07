@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "outDir": "../../built/client",
+    "noImplicitAny": false,
+    "allowSyntheticDefaultImports": false,
+    "moduleResolution": "node",
+    "allowJs": true,
+    "module": "es6",
+    "target": "es5",
+    "jsx": "react",
+    "baseUrl": ".",
+    "paths": {
+      "@types": ["../@types"],
+      "@types/*": ["../@types/*"],
+      "@redux/*": ["js/redux/*"],
+      "@utils/*": ["js/utils/*"],
+      "@images/*": ["images/*"],
+      "@components/*": ["js/components/*"],
+    },
+    "typeRoots": [
+      "../@types",
+      "../../node_modules/@types"
+    ]
+  },
+  "include": ["../@types/*"],
+  "exclude": ["**/*.stories.tsx"]
+}

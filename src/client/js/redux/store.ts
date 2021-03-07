@@ -1,13 +1,9 @@
-import {applyMiddleware, createStore, combineReducers, compose} from 'redux'
-import thunk from 'redux-thunk'
+import { applyMiddleware, createStore, combineReducers } from 'redux'
+const thunk = require('redux-thunk').default
 
-import * as reducers from 'redux/reducers'
+import * as reducers from './reducers'
 
 let middleware = applyMiddleware(thunk)
-
-if (window.__REDUX_DEVTOOLS_EXTENSION__) {
-  middleware = compose(applyMiddleware(thunk), window.__REDUX_DEVTOOLS_EXTENSION__())
-}
 
 export default function configureStore(initialState) {
   const store = createStore(combineReducers(reducers), initialState, middleware)
@@ -17,7 +13,7 @@ export default function configureStore(initialState) {
     module.hot.accept('./reducers', () => {
       const newReducers = require('./reducers/index')
 
-      store.replaceReducer(combineReducers(newReducers), middleware)
+      store.replaceReducer(combineReducers(newReducers) as any)
     })
   }
 

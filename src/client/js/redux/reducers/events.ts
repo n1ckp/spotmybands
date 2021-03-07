@@ -3,8 +3,8 @@ import {
   REMOVE_USER_ARTIST,
 } from '../actions'
 
-import {save, load} from 'util/storage'
-import {sanitiseArtistEvents} from 'util/sanitise'
+import { save, load } from '@utils/storage'
+import { sanitiseArtistEvents } from '@utils/sanitise'
 
 const getInitialState = () => {
   return sanitiseArtistEvents(load('userEvents'))
@@ -16,22 +16,22 @@ export default function events(state = getInitialState(), action) {
   if (action.type === FETCH_ARTIST_EVENTS) {
     updatedState[action.artistID] = {
       loading: true,
-      hidden:  false,
-      events:  [],
+      hidden: false,
+      events: [],
     }
   }
   else if (action.type === RECEIVED_ARTIST_EVENTS) {
     updatedState[action.artistID] = {
       loading: false,
-      hidden:  false,
-      events:  action.artistEvents,
+      hidden: false,
+      events: action.artistEvents,
     }
   }
   else if (action.type === TOGGLE_ARTIST_EVENTS) {
     updatedState[action.artistID] = {
       loading: false,
-      hidden:  action.value,
-      events:  updatedState[action.artistID].events,
+      hidden: action.value,
+      events: updatedState[action.artistID].events,
     }
   }
   else if (action.type === REMOVE_USER_ARTIST) {

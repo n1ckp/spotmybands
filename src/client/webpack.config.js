@@ -12,7 +12,7 @@ var config = {
   cache: true,
   entry: {
     'main-app': [
-      path.join(CLIENT_PATH, 'js', 'app.js'),
+      path.join(CLIENT_PATH, 'js', 'app.tsx'),
     ],
   },
   mode:   mode,
@@ -27,36 +27,38 @@ var config = {
   },
   resolve: {
     modules: [
-      path.join(CLIENT_PATH, 'sass'),
-      path.join(CLIENT_PATH, 'images'),
-      path.join(CLIENT_PATH, 'js'),
       'node_modules',
     ],
-    extensions: ['*', '.js'],
+    alias: {
+      '@types':      path.resolve(__dirname, '..', '@types'),
+      '@utils':      path.resolve(CLIENT_PATH, 'js', 'utils'),
+      '@images':     path.resolve(CLIENT_PATH, 'images'),
+      '@styles':     path.resolve(CLIENT_PATH, 'sass'),
+      '@redux':      path.resolve(CLIENT_PATH, 'js', 'redux'),
+      '@components': path.resolve(CLIENT_PATH, 'js', 'components'),
+    },
+    extensions: ['*', '.ts', '.tsx', '.js'],
   },
   module: {
     rules: [
       {
-        test:    /\.jsx?$/,
-        include: path.join(CLIENT_PATH, 'js'),
+        test:    /\.(j|t)sx?$/,
+        exclude: /node_modules/,
         use:     {
-          loader:  'babel-loader',
+          loader:  'ts-loader',
           options: {
-            presets: ['@babel/env', '@babel/preset-react'],
+            configFile: path.resolve(__dirname, 'tsconfig.webpack.json'),
           },
         },
       },
       {
-        test:    /\.s?css$/,
-        include: path.join(CLIENT_PATH),
-        use:     [
+        test: /\.s?css$/,
+        use:  [
           'style-loader',
           {
             loader:  'css-loader',
             options: {
-              modules: {
-                localIdentName: '[path]___[name]__[local]___[hash:base64:5]',
-              },
+              modules: true,
             },
           },
           {

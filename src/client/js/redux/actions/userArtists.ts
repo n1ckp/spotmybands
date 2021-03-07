@@ -1,4 +1,4 @@
-import {load, remove} from 'util/storage'
+import {load, remove} from '@utils/storage'
 
 export const FETCHED_USER_ARTISTS = 'FETCHED_USER_ARTISTS'
 export const ADD_USER_ARTIST = 'ADD_USER_ARTIST'

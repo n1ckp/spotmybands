@@ -1,14 +1,14 @@
-import React from 'react'
+import * as React from 'react'
 import LoadingOverlay from './LoadingOverlay'
 
 export default {
-  title:     'Atoms/LoadingOverlay',
+  title: 'Atoms/LoadingOverlay',
   component: LoadingOverlay,
 }
 
 const Template = (args) => (
   <LoadingOverlay {...args}>
-    <p style={{padding: '16px'}}>Something being loaded...</p>
+    <p style={{ padding: '16px' }}>Something being loaded...</p>
   </LoadingOverlay>
 )
 

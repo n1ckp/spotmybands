@@ -1,12 +1,12 @@
-import React from 'react'
+import * as React from 'react'
 import Button from './Button'
 
-import DeleteIcon from 'icons/delete.svg'
+const DeleteIcon = require('@images/icons/delete.svg').default
 
 export default {
-  title:     'Atoms/Button',
+  title: 'Atoms/Button',
   component: Button,
-  argTypes:  {onClick: {action: 'onClick'}},
+  argTypes: { onClick: { action: 'onClick' } },
 }
 
 const Template = (args) => <Button {...args}>Click me</Button>

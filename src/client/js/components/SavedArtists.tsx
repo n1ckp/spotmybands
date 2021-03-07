@@ -1,22 +1,25 @@
-import React, {useState} from 'react'
-import PropTypes from 'prop-types'
-import {connect} from 'react-redux'
+import * as React from 'react'
+import { connect } from 'react-redux'
 
-import Text from 'components/shared/widgets/Text'
-import Button from 'components/shared/widgets/Button'
+import Text from '@components/shared/widgets/Text'
+import Button from '@components/shared/widgets/Button'
 
-import ArtistRow from 'components/shared/ArtistRow'
+import ArtistRow from '@components/shared/ArtistRow'
 
-import AddArtistsModal from 'components/AddArtistsModal'
+import AddArtistsModal from '@components/AddArtistsModal'
 
-import SearchIcon from 'icons/search.svg'
+const SearchIcon = require('@images/icons/search.svg').default
 
-import styles from './SavedArtists.scss'
+const styles = require('./SavedArtists.scss').default
 
-const SavedArtists = props => {
-  const [filterText, setFilterText] = useState('')
+type SavedArtistsProps = {
+  artists: Object,
+}
 
-  const filteredArtists = Object.values(props.artists).filter(a => a.name.toLowerCase().match(filterText.toLowerCase()))
+const SavedArtists: React.FC<SavedArtistsProps> = props => {
+  const [filterText, setFilterText] = React.useState('')
+
+  const filteredArtists = Object.values(props.artists as { [key: string]: any }).filter(a => a.name.toLowerCase().match(filterText.toLowerCase()))
   const hasArtists = Object.values(props.artists).length > 0
   const hasVisibleArtists = filteredArtists.length > 0
 
@@ -49,10 +52,6 @@ const SavedArtists = props => {
       {artistTable}
     </div>
   )
-}
-
-SavedArtists.propTypes = {
-  artists: PropTypes.object,
 }
 
 const mapStateToProps = state => {
