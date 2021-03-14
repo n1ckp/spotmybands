@@ -1,27 +1,30 @@
-var webpack = require('webpack')
-var path = require('path')
-var env = process.env.NODE_ENV || 'development'
-var prod = env === 'production'
-var mode = process.env.NODE_ENV || 'development'
-var TerserPlugin = require('terser-webpack-plugin')
+const webpack = require('webpack')
+const path = require('path')
+const ENV = process.env.NODE_ENV || 'development'
+const IS_PROD = ENV === 'production'
+const TerserPlugin = require('terser-webpack-plugin')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
-var CLIENT_PATH = __dirname
-var BUILD_PATH = path.join(__dirname, '../../built/client')
+const CLIENT_PATH = __dirname
+const BUILD_PATH = path.join(__dirname, '../../built/client')
 
-var config = {
+module.exports = {
   cache: true,
   entry: {
     'main-app': [
       path.join(CLIENT_PATH, 'js', 'app.tsx'),
     ],
   },
-  mode:   mode,
-  output: {
+  mode:    process.env.NODE_ENV || 'development',
+  devtool: !IS_PROD && 'source-map',
+  output:  {
     path:       BUILD_PATH,
     publicPath: '/assets',
     filename:   '[name].chunk.js',
   },
-  optimization: {
+  optimization: IS_PROD ? {
+    minimizer: [new TerserPlugin()],
+  } : {
     moduleIds:    'named',
     emitOnErrors: false,
   },
@@ -46,18 +49,19 @@ var config = {
         use:     {
           loader:  'ts-loader',
           options: {
-            configFile: path.resolve(__dirname, 'tsconfig.webpack.json'),
+            configFile: path.resolve(__dirname, IS_PROD ? 'tsconfig.webpack.json' : 'tsconfig.webpack.dev.json'),
           },
         },
       },
       {
         test: /\.s?css$/,
         use:  [
-          'style-loader',
+          IS_PROD ? MiniCssExtractPlugin.loader : 'style-loader',
           {
             loader:  'css-loader',
             options: {
-              modules: true,
+              modules:   true,
+              sourceMap: !IS_PROD,
             },
           },
           {
@@ -66,6 +70,7 @@ var config = {
               sassOptions: {
                 includePaths: [path.join(CLIENT_PATH, 'sass')],
               },
+              sourceMap: !IS_PROD,
             },
           },
         ],
@@ -87,25 +92,17 @@ var config = {
       },
     ],
   },
-  plugins: [],
-}
-
-if (prod) {
-  config.plugins.push(new webpack.DefinePlugin({
-    'process.env': {
-      'NODE_ENV': '"production"',
-    },
-  }))
-
-  config.optimization = {
-    minimizer: [new TerserPlugin()],
-  }
-}
-else {
-  config.devtool = 'source-map'
-  config.plugins.push(new webpack.HotModuleReplacementPlugin())
-
-  config.devServer = {
+  plugins: IS_PROD ? [
+    new MiniCssExtractPlugin(),
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': '"production"',
+      },
+    }),
+  ] : [
+    new webpack.HotModuleReplacementPlugin(),
+  ],
+  devServer: !IS_PROD ? {
     contentBase: BUILD_PATH,
     port:        3000,
     proxy:       {
@@ -116,9 +113,5 @@ else {
     },
     historyApiFallback: true,
     hot:                true,
-  }
-  config.module.rules[1].use[1].options.sourceMap = true
-  config.module.rules[1].use[2].options.sourceMap = true
+  } : undefined,
 }
-
-module.exports = config

@@ -28,7 +28,8 @@ app.get('/', async (req, res) => {
   }
   const appDataString = JSON.stringify(appData, null, 2);
   console.log('appData', appData);
-  res.render('index', { appData, appDataString });
+  const isProd = process.env.NODE_ENV === 'production'
+  res.render('index', { appData, appDataString, isProd });
 });
 app.post('/api/artist-search', artistSearch);
 app.get('/api/artist-events', artistEvents);

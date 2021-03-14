@@ -1,0 +1,6 @@
+{
+  "extends": "./tsconfig.webpack.json",
+  "compilerOptions": {
+    "sourceMap": true,
+  },
+}
