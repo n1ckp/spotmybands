@@ -45,7 +45,6 @@ function reducer(state = {}, { type, payload }) {
 export const GlobalStateContext = React.createContext({ state: undefined, dispatch: undefined });
 
 export function GlobalStateProvider({ initialState = INITIAL_STATE, children }) {
-  console.log(initialState)
   const [state, dispatch] = React.useReducer(reducer, initialState)
   const contextValue = React.useMemo(() => {
     return { state, dispatch };

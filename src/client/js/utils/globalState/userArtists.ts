@@ -56,7 +56,9 @@ export const actionAddUserArtist = (dispatch, { artistID, artist }) => {
 export const actionRemoveUserArtist = (dispatch, { artistID }) => {
   dispatch({
     type: actions.REMOVE_USER_ARTIST,
-    artistID,
+    payload: {
+      artistID,
+    },
   })
 }
 

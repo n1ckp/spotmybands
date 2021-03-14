@@ -49,8 +49,6 @@ export function reducer(state = getInitialState(), { type, payload }: ActionData
     case actions.REMOVE_USER_ARTIST:
       delete updatedState[payload.artistID]
       break;
-    default:
-      throw new Error();
   }
   save('userEvents', updatedState)
   return updatedState
