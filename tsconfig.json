@@ -10,7 +10,6 @@
     "paths": {
       "@types": ["@types"],
       "@types/*": ["@types/*"],
-      "@redux/*": ["src/client/js/redux/*"],
       "@utils/*": ["src/client/js/utils/*"],
       "@images/*": ["src/client/images/*"],
       "@components/*": ["src/client/js/components/*"],

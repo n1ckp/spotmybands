@@ -34,7 +34,6 @@ var config = {
       '@utils':      path.resolve(CLIENT_PATH, 'js', 'utils'),
       '@images':     path.resolve(CLIENT_PATH, 'images'),
       '@styles':     path.resolve(CLIENT_PATH, 'sass'),
-      '@redux':      path.resolve(CLIENT_PATH, 'js', 'redux'),
       '@components': path.resolve(CLIENT_PATH, 'js', 'components'),
     },
     extensions: ['*', '.ts', '.tsx', '.js'],

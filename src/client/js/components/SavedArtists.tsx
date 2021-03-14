@@ -12,11 +12,7 @@ const SearchIcon = require('@images/icons/search.svg').default
 
 const styles = require('./SavedArtists.scss').default
 
-type SavedArtistsProps = {
-  artists: Object,
-}
-
-const SavedArtists: React.FC<SavedArtistsProps> = () => {
+const SavedArtists: React.FC = () => {
   const [filterText, setFilterText] = React.useState('')
   const { state } = React.useContext(GlobalStateContext)
   const artists = state.userArtists

@@ -12,7 +12,6 @@
     "paths": {
       "@types": ["../@types"],
       "@types/*": ["../@types/*"],
-      "@redux/*": ["js/redux/*"],
       "@utils/*": ["js/utils/*"],
       "@images/*": ["images/*"],
       "@components/*": ["js/components/*"],

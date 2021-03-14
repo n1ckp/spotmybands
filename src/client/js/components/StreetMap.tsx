@@ -1,7 +1,7 @@
 import * as React from 'react'
-import { connect } from 'react-redux'
+import { GlobalStateContext } from '@utils/globalState'
 import { format } from 'date-fns'
-import { Map, Marker } from 'pigeon-maps'
+import { Map } from 'pigeon-maps'
 
 const CloseIcon = require('@images/icons/close.svg').default
 const MarkerIcon = require('@images/icons/map-marker.svg').default
@@ -45,12 +45,23 @@ const CustomMarker: React.FC<CustomMarkerProps> = ({ anchor, payload, top = 0, l
   </div>
 )
 
-type StreetMapProps = {
-  markers: MarkerData[],
+const getMarkersFromState = (state: { [key: string]: any }) => {
+  const markers = []
+
+  Object.values(state.events as { [key: string]: any }).forEach(artistEvents => {
+    if (!artistEvents.hidden) {
+      markers.push(...artistEvents.events)
+    }
+  })
+
+  return markers
 }
 
-const StreetMap: React.FC<StreetMapProps> = ({ markers }) => {
+const StreetMap: React.FC = () => {
   const [selectedMarkerIndex, setSelectedMarkerIndex] = React.useState(undefined)
+  const { state } = React.useContext(GlobalStateContext)
+
+  const markers = getMarkersFromState(state)
 
   return (
     <div className={styles.container}>
@@ -77,20 +88,4 @@ const StreetMap: React.FC<StreetMapProps> = ({ markers }) => {
   )
 }
 
-const mapStateToProps = (state: { [key: string]: any }) => {
-  const markers = []
-
-  Object.values(state.events as { [key: string]: any }).forEach(artistEvents => {
-    if (!artistEvents.hidden) {
-      markers.push(...artistEvents.events)
-    }
-  })
-
-  return {
-    markers,
-  }
-}
-
-const StreetMapContainer = connect(mapStateToProps)(StreetMap)
-
-export default StreetMapContainer
+export default StreetMap

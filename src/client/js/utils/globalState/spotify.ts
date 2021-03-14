@@ -1,6 +1,6 @@
 import { apiFetch } from '@utils/settings'
 
-const actions = {
+export const actions = {
   SPOTIFY_ARTIST_SEARCH__BEGIN: 'SPOTIFY_ARTIST_SEARCH__BEGIN',
   SPOTIFY_ARTIST_SEARCH__END: 'SPOTIFY_ARTIST_SEARCH__END',
   CLEAR_SPOTIFY_ARTISTS: 'CLEAR_SPOTIFY_ARTISTS',
@@ -15,7 +15,7 @@ export const getInitialState = () => ({
   },
 })
 
-export const reducer = (state = getInitialState(), { type, payload }) => {
+export function reducer(state = getInitialState(), { type, payload }) {
   let updatedState = Object.assign({}, state)
 
   if (type === actions.SPOTIFY_ARTIST_SEARCH__BEGIN) {
@@ -50,6 +50,6 @@ export const actionSpotifySearchArtists = (dispatch, { searchText }) => {
     })
 }
 
-export const actionClearSpotifyArtists = (dispatch, _) => {
+export const actionClearSpotifyArtists = (dispatch) => {
   dispatch({ type: actions.CLEAR_SPOTIFY_ARTISTS })
 }

@@ -4,7 +4,7 @@ import { sanitiseArtistEvents } from '@utils/sanitise'
 
 export const name = 'events'
 
-export const getInitialState = () => sanitiseArtistEvents(load('userEvents'))
+export const getInitialState = () => sanitiseArtistEvents(load('userEvents')) || {}
 
 export const actions = {
   FETCHING_ARTIST_EVENTS: 'FETCH_ARTIST_EVENTS',
@@ -73,12 +73,12 @@ export const actionFetchArtistEvents = (dispatch, { artistName, artistID }) => {
     })
 }
 
-export const actionToggleArtistEvents = (dispatch, { artistID, value }) => {
+export const actionToggleArtistEvents = (dispatch, { artistID, isHidden }) => {
   return dispatch({
     type: actions.TOGGLE_ARTIST_EVENTS,
     payload: {
       artistID,
-      value,
+      isHidden,
     },
   })
 }

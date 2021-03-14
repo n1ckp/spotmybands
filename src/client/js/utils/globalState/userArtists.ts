@@ -2,7 +2,7 @@ import { save, load, remove } from '@utils/storage'
 
 export const name = 'userArtists'
 
-const actions = {
+export const actions = {
   FETCHED_USER_ARTISTS: 'FETCHED_USER_ARTISTS',
   ADD_USER_ARTIST: 'ADD_USER_ARTIST',
   CLEAR_USER_ARTISTS: 'CLEAR_USER_ARTISTS',
@@ -13,7 +13,7 @@ export const getInitialState = () => {
   return load('userArtists') || {}
 }
 
-export const reducer = (state = getInitialState(), { type, payload }) => {
+export function reducer(state = getInitialState(), { type, payload }) {
   let updatedState = Object.assign({}, state)
 
   if (type === actions.FETCHED_USER_ARTISTS) {

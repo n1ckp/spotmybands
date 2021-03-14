@@ -1,14 +1,13 @@
 import * as React from 'react'
 import StreetMap from './StreetMap'
-import { Provider } from 'react-redux'
-import configureStore from '@redux/store'
+import { GlobalStateProvider } from '@utils/globalState'
 
 export default {
   title: 'Organisms/StreetMap',
   component: StreetMap,
 }
 
-const Template = (args) => <Provider store={configureStore({})}><StreetMap {...args} /></Provider>
+const Template = (args) => <GlobalStateProvider><StreetMap {...args} /></GlobalStateProvider>
 
 export const NoMarkers = Template.bind({})
 
@@ -48,5 +47,5 @@ const initStore = {
   },
 }
 
-export const WithMarkers = (args) => <Provider store={configureStore(initStore)}><StreetMap {...args} /></Provider>
+export const WithMarkers = (args) => <GlobalStateProvider initialState={initStore}><StreetMap {...args} /></GlobalStateProvider>
 

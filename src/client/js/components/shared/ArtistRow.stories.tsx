@@ -1,7 +1,6 @@
 import * as React from 'react'
 import ArtistRow from './ArtistRow'
-import { Provider } from 'react-redux'
-import configureStore from '@redux/store'
+import { GlobalStateProvider } from '@utils/globalState'
 
 export default {
   title: 'Molecules/ArtistRow',
@@ -14,7 +13,7 @@ export default {
   },
 }
 
-const Template = (args) => <Provider store={configureStore({})}><ArtistRow {...args} /></Provider>
+const Template = (args) => <GlobalStateProvider><ArtistRow {...args} /></GlobalStateProvider>
 
 export const OnUserList = Template.bind({})
 OnUserList.args = {
