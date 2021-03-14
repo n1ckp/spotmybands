@@ -1,4 +1,5 @@
 import * as React from 'react'
+import * as classnames from 'classnames'
 import { GlobalStateContext } from '@utils/globalState'
 import { actionFetchArtistEvents, actionToggleArtistEvents } from '@utils/globalState/events'
 import { actionRemoveUserArtist } from '@utils/globalState/userArtists'
@@ -32,8 +33,8 @@ const ArtistRow: React.FC<ArtistRowProps> = ({
   const artistData = state.events[artistID]
 
   const fetchingEvents = artistData && artistData.loading
-  const eventsNotFetched = artistData === undefined
-  const eventsHidden = artistData && !artistData.hidden
+  const eventsFetched = artistData !== undefined
+  const eventsShown = artistData && !artistData.hidden && !artistData.loading && artistData.events.length
   const noEvents = artistData && !artistData.loading && artistData.events.length === 0
 
   const fetchArtistEvents = () => {
@@ -46,27 +47,24 @@ const ArtistRow: React.FC<ArtistRowProps> = ({
     actionRemoveUserArtist(dispatch, { artistID })
   }
 
-  const classNames = []
-
   let button = undefined
   let removeButton = undefined
 
   if (!onUserList) {
     button = <Button onClick={() => addToUserList(artist)}>Add to my list</Button>
   }
-  else if (eventsNotFetched) {
+  else if (!eventsFetched) {
     button = <Button onClick={() => fetchArtistEvents()}>Fetch Events</Button>
   }
   else if (fetchingEvents) {
     button = <p>Fetching events...</p>
   }
   else if (noEvents) {
-    classNames.push(styles.noEvents)
     button = <p>No upcoming events.</p>
   }
   else {
-    button = <Button onClick={() => toggleEvents(eventsHidden)}>
-      {`${eventsHidden ? 'Hide' : 'Show'} Events`}
+    button = <Button onClick={() => toggleEvents(eventsShown)}>
+      {`${eventsShown ? 'Hide' : 'Show'} Events`}
     </Button>
   }
 
@@ -74,9 +72,14 @@ const ArtistRow: React.FC<ArtistRowProps> = ({
     removeButton = <Button className={styles.delete} onClick={() => onRemoveArtist()}><DeleteIcon /></Button>
   }
 
+  const className = classnames({
+    [styles.noEvents]: noEvents,
+    [styles.eventsShown]: eventsShown,
+  })
+
   return (
     <LoadingOverlay active={fetchingEvents}>
-      <div id={styles.container} className={classNames.join(' ')}>
+      <div id={styles.container} className={className}>
         <span className={styles.icon} style={{ backgroundImage: `url(${artist.logoURL})` }}></span>
         <div className={styles.info}>
           <h2>{artist.name}</h2>

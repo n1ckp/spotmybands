@@ -69,6 +69,9 @@
   &.noEvents {
     background-color: $colour-light-grey;
   }
+  &.eventsShown {
+    background-color: $colour-light-purple;
+  }
 }
 
 @include tablet {
