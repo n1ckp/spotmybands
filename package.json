@@ -12,7 +12,7 @@
     "start:client-dev": "webpack serve --config ./src/client/webpack.config.js --host 0.0.0.0",
     "build:server": "tsc --p ./src/server",
     "start": "node ./built/server/server.js",
-    "start:server-dev": "ts-node --project ./src/server/tsconfig.json ./src/server/server",
+    "start:server-dev": "ts-node --project ./src/server/tsconfig.server.json ./src/server/server",
     "copy:assets": "node ./scripts/copyAssets.js",
     "heroku-postbuild": "npm run build:server && npm run build:client && npm run copy:assets && npm run storybook:build",
     "storybook": "start-storybook",
