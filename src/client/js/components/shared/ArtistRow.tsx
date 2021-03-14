@@ -54,7 +54,7 @@ const ArtistRow: React.FC<ArtistRowProps> = ({
     button = <Button onClick={() => addToUserList(artist)}>Add to my list</Button>
   }
   else if (!eventsFetched) {
-    button = <Button onClick={() => fetchArtistEvents()}>Fetch Events</Button>
+    button = <Button type="primary" onClick={() => fetchArtistEvents()}>Fetch Events</Button>
   }
   else if (fetchingEvents) {
     button = <p>Fetching events...</p>
@@ -63,7 +63,7 @@ const ArtistRow: React.FC<ArtistRowProps> = ({
     button = <p>No upcoming events.</p>
   }
   else {
-    button = <Button onClick={() => toggleEvents(eventsShown)}>
+    button = <Button type={eventsShown ? '' : 'primary'} onClick={() => toggleEvents(eventsShown)}>
       {`${eventsShown ? 'Hide' : 'Show'} Events`}
     </Button>
   }
