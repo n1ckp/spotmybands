@@ -1,15 +1,14 @@
 import * as React from 'react'
 import { render } from 'react-dom'
-import { Provider } from 'react-redux'
-import configureStore from './redux/store'
+import { GlobalStateProvider } from '@utils/globalState'
 
 import SpotMyBandsApp from './components/SpotMyBandsApp'
 
 const renderApp = () => {
   render((
-    <Provider store={configureStore({})}>
+    <GlobalStateProvider>
       <SpotMyBandsApp />
-    </Provider>
+    </GlobalStateProvider>
   ), document.getElementById('app-root'))
 }
 

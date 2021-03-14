@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "target": "es6",
+    "baseUrl": ".",
+    "jsx": "react",
+    "paths": {
+      "@types": ["@types"],
+      "@types/*": ["@types/*"],
+      "@utils/*": ["src/client/js/utils/*"],
+      "@images/*": ["src/client/images/*"],
+      "@components/*": ["src/client/js/components/*"],
+    },
+  },
+  "include": ["src"],
+}

@@ -1,7 +1,7 @@
 import * as React from 'react'
-import { connect } from 'react-redux'
-
-import { spotifySearchArtists, addUserArtist, clearSpotifyArtists } from '@redux/actions'
+import { GlobalStateContext } from '@utils/globalState'
+import { actionSpotifySearchArtists, actionClearSpotifyArtists } from '@utils/globalState/spotify'
+import { actionAddUserArtist } from '@utils/globalState/userArtists'
 
 import ModalPanel from '@components/ModalPanel'
 import Text from '@components/shared/widgets/Text'
@@ -11,24 +11,33 @@ const SearchIcon = require('@images/icons/search.svg').default
 
 const styles = require('./AddArtistsModal.scss').default
 
-type SpotifyArtist = {
-  id: string,
-}
-
 type AddArtistsModalProps = {
-  loadingSpotifyArtists: boolean,
-  userArtists: Object,
-  spotifyArtists: SpotifyArtist[],
-  addToUserList: (artist: Object) => void,
-  spotifySearchArtist: (searchText: string) => void,
   children: React.ReactNode,
 }
 
-const AddArtistsModal: React.FC<AddArtistsModalProps> = props => {
-  const { children, loadingSpotifyArtists, spotifyArtists, userArtists, addToUserList } = props
+const AddArtistsModal: React.FC<AddArtistsModalProps> = ({ children }) => {
   const [open, setModalOpen] = React.useState(false)
   const artistSearch = React.useRef(null)
   const searchTextEl = React.useRef(null)
+  const { state, dispatch } = React.useContext(GlobalStateContext)
+
+  const loadingSpotifyArtists = state.spotify.artists.loading
+  const spotifyArtists = state.spotify.artists.list
+  const userArtists = state.userArtists
+
+  const spotifySearchArtist = (searchText: string) => {
+    if (searchText && searchText !== '') {
+      actionSpotifySearchArtists(dispatch, { searchText })
+    }
+    else {
+      actionClearSpotifyArtists(dispatch)
+    }
+  }
+
+  const addToUserList = (artist) => {
+    actionAddUserArtist(dispatch, { artistID: artist.id, artist })
+  }
+
 
   React.useEffect(() => {
     if (open) {
@@ -39,7 +48,7 @@ const AddArtistsModal: React.FC<AddArtistsModalProps> = props => {
   const handleChangeArtistSearch = text => {
     window.clearTimeout(artistSearch.current)
     artistSearch.current = window.setTimeout(() => {
-      props.spotifySearchArtist(text)
+      spotifySearchArtist(text)
     }, 500)
   }
 
@@ -84,30 +93,4 @@ const AddArtistsModal: React.FC<AddArtistsModalProps> = props => {
   )
 }
 
-const mapStateToProps = state => {
-  return {
-    loadingSpotifyArtists: state.spotify.artists.loading,
-    spotifyArtists: state.spotify.artists.list,
-    userArtists: state.userArtists,
-  }
-}
-
-const mapDispatchToProps = dispatch => {
-  return {
-    spotifySearchArtist: searchText => {
-      if (searchText && searchText !== '') {
-        dispatch(spotifySearchArtists(searchText))
-      }
-      else {
-        dispatch(clearSpotifyArtists())
-      }
-    },
-    addToUserList: artist => {
-      dispatch(addUserArtist(artist.id, artist))
-    },
-  }
-}
-
-const AddArtistsModalContainer = connect(mapStateToProps, mapDispatchToProps)(AddArtistsModal)
-
-export default AddArtistsModalContainer
+export default AddArtistsModal

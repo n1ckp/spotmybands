@@ -1,7 +1,7 @@
 import * as React from 'react'
-import { connect } from 'react-redux'
-
-import { fetchArtistEvents, toggleArtistEvents, removeUserArtist } from '@redux/actions'
+import { GlobalStateContext } from '@utils/globalState'
+import { actionFetchArtistEvents, actionToggleArtistEvents } from '@utils/globalState/events'
+import { actionRemoveUserArtist } from '@utils/globalState/userArtists'
 
 const styles = require('./ArtistRow.scss').default
 
@@ -19,22 +19,33 @@ type ArtistData = {
 type ArtistRowProps = {
   artist: ArtistData,
   onUserList: boolean,
-  addToUserList: (artist: ArtistData) => void,
-  fetchArtistEvents: () => void,
-  eventsNotFetched: boolean,
-  eventsHidden: boolean,
-  toggleEvents: (eventsHidden: boolean) => void,
-  onRemoveArtist: () => void,
-  noEvents: boolean,
-  fetchingEvents: boolean,
+  addToUserList?: (artist: ArtistData) => void,
 }
 
-const ArtistRow: React.FC<ArtistRowProps> = props => {
-  const {
-    artist, onUserList, addToUserList, fetchArtistEvents,
-    toggleEvents, eventsNotFetched, eventsHidden,
-    onRemoveArtist, noEvents, fetchingEvents,
-  } = props
+const ArtistRow: React.FC<ArtistRowProps> = ({
+  artist, onUserList, addToUserList,
+}) => {
+  const artistName = artist.name
+  const artistID = artist.id
+
+  const { state, dispatch } = React.useContext(GlobalStateContext)
+  const artistData = state.events[artistID]
+
+  const fetchingEvents = artistData && artistData.loading
+  const eventsNotFetched = artistData === undefined
+  const eventsHidden = artistData && !artistData.hidden
+  const noEvents = artistData && !artistData.loading && artistData.events.length === 0
+
+  const fetchArtistEvents = () => {
+    actionFetchArtistEvents(dispatch, { artistName, artistID })
+  }
+  const toggleEvents = (isHidden: boolean) => {
+    actionToggleArtistEvents(dispatch, { artistID, isHidden })
+  }
+  const onRemoveArtist = () => {
+    actionRemoveUserArtist(dispatch, { artistID })
+  }
+
   const classNames = []
 
   let button = undefined
@@ -88,39 +99,4 @@ const ArtistRow: React.FC<ArtistRowProps> = props => {
   )
 }
 
-const mapStateToProps = (state, ownProps) => {
-  const { id } = ownProps.artist
-  const artistData = state.events[id]
-
-  const fetchingEvents = artistData && artistData.loading
-  const eventsNotFetched = artistData === undefined
-  const eventsHidden = artistData && !artistData.hidden
-  const noEvents = artistData && !artistData.loading && artistData.events.length === 0
-
-  return {
-    eventsNotFetched,
-    eventsHidden,
-    noEvents,
-    fetchingEvents,
-  }
-}
-
-const mapDispatchToProps = (dispatch, ownProps) => {
-  const { name, id } = ownProps.artist
-
-  return {
-    fetchArtistEvents: () => {
-      dispatch(fetchArtistEvents(name, id))
-    },
-    toggleEvents: value => {
-      dispatch(toggleArtistEvents(id, value))
-    },
-    onRemoveArtist: () => {
-      dispatch(removeUserArtist(id))
-    },
-  }
-}
-
-const ArtistRowContainer = connect(mapStateToProps, mapDispatchToProps)(ArtistRow)
-
-export default ArtistRowContainer
+export default ArtistRow

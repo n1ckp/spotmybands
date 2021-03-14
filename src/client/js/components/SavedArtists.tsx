@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { connect } from 'react-redux'
+import { GlobalStateContext } from '@utils/globalState'
 
 import Text from '@components/shared/widgets/Text'
 import Button from '@components/shared/widgets/Button'
@@ -12,15 +12,13 @@ const SearchIcon = require('@images/icons/search.svg').default
 
 const styles = require('./SavedArtists.scss').default
 
-type SavedArtistsProps = {
-  artists: Object,
-}
-
-const SavedArtists: React.FC<SavedArtistsProps> = props => {
+const SavedArtists: React.FC = () => {
   const [filterText, setFilterText] = React.useState('')
+  const { state } = React.useContext(GlobalStateContext)
+  const artists = state.userArtists
 
-  const filteredArtists = Object.values(props.artists as { [key: string]: any }).filter(a => a.name.toLowerCase().match(filterText.toLowerCase()))
-  const hasArtists = Object.values(props.artists).length > 0
+  const filteredArtists = Object.values(artists as { [key: string]: any }).filter(a => a.name.toLowerCase().match(filterText.toLowerCase()))
+  const hasArtists = Object.values(artists).length > 0
   const hasVisibleArtists = filteredArtists.length > 0
 
   const artistTable = (
@@ -54,13 +52,5 @@ const SavedArtists: React.FC<SavedArtistsProps> = props => {
   )
 }
 
-const mapStateToProps = state => {
-  return {
-    artists: state.userArtists,
-  }
-}
-
-const SavedArtistsContainer = connect(mapStateToProps)(SavedArtists)
-
-export default SavedArtistsContainer
+export default SavedArtists
 
