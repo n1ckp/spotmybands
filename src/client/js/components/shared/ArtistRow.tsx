@@ -63,7 +63,7 @@ const ArtistRow: React.FC<ArtistRowProps> = ({
     button = <p>No upcoming events.</p>
   }
   else {
-    button = <Button type={eventsShown ? '' : 'primary'} onClick={() => toggleEvents(eventsShown)}>
+    button = <Button type={eventsShown ? undefined : 'primary'} onClick={() => toggleEvents(eventsShown)}>
       {`${eventsShown ? 'Hide' : 'Show'} Events`}
     </Button>
   }

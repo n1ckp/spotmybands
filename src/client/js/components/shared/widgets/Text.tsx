@@ -3,36 +3,36 @@ import * as classnames from 'classnames'
 
 const styles = require('./Text.scss').default
 
-export const TextIcon = props => {
-  let component = null
+interface TextIconProps {
+  icon: React.ReactElement;
+  focused: boolean;
+};
 
-  const { icon, focused } = props
-
-  if (typeof icon === 'string') {
-    component = <span className={styles.icon} style={{ backgroundImage: `url(${icon})` }}></span>
-  }
-  else {
-    const iconClassName = classnames(styles.icon, { [styles.focused]: focused })
-
-    component = React.cloneElement(icon, { className: iconClassName })
-  }
-
-  return component
+export const TextIcon = ({
+  icon,
+  focused,
+}: TextIconProps) => {
+  const iconClassName = classnames(styles.icon, { [styles.focused]: focused })
+  return React.cloneElement(icon, { className: iconClassName })
 }
 
-type TextProps = {
-  placeholder: string,
-  icon: string | JSX.Element,
-  initialValue?: string,
-  onChange?: (val: string) => any,
+interface TextProps {
+  placeholder: string;
+  icon: React.ReactElement;
+  initialValue?: string;
+  onChange?: (val: string) => any;
 }
 
 type RefType = {
   focus: () => void
 } | null;
 
-export const Text = React.forwardRef<RefType, TextProps>((props, ref) => {
-  const { initialValue, placeholder, icon, onChange } = props
+export const Text = React.forwardRef<RefType, TextProps>(({
+  initialValue,
+  placeholder,
+  icon,
+  onChange,
+}, ref) => {
   const [value, setValue] = React.useState('')
   const [focused, setFocused] = React.useState(false)
   const inputEl = React.useRef<HTMLInputElement>(null)

@@ -6,7 +6,14 @@ const SearchIcon = require('@images/icons/search.svg').default
 export default {
   title: 'Atoms/Text',
   component: Text,
-  argTypes: { onChange: { action: 'onChange' } },
+  argTypes: {
+    onChange: { action: 'onChange' },
+    icon: {
+      control: {
+        disable: true
+      }
+    }
+  },
 }
 
 const Template = (args) => <Text {...args} />

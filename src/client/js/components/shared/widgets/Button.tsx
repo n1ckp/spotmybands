@@ -2,15 +2,23 @@ import * as React from 'react'
 
 const styles = require('./Button.scss').default
 
-type ButtonProps = {
-  type?: string,
-  className?: string,
-  onClick?: () => void,
-  children?: React.ReactNode,
-}
+export const DEFAULT_BUTTON_TYPE = undefined
+export const BUTTON_TYPES = [DEFAULT_BUTTON_TYPE, "primary"] as const;
+type ButtonType = typeof BUTTON_TYPES[number];
 
-const Button: React.FC<ButtonProps> = props => {
-  const { className, type, children, onClick } = props
+interface ButtonProps {
+  type?: ButtonType;
+  className?: string;
+  onClick?: () => void;
+  children?: React.ReactNode;
+};
+
+const Button = ({
+  className,
+  type,
+  children,
+  onClick
+}: ButtonProps) => {
   const classNames = [styles.button]
 
   if (type) {
