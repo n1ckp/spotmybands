@@ -1,10 +1,12 @@
-export const sanitiseArtistEvents = (artistEventsObj: { [key: string]: any }) => {
+export const sanitiseArtistEvents = (artistEventsObj: {
+  [key: string]: any;
+}) => {
   if (!artistEventsObj) {
-    return {}
+    return {};
   }
-  Object.keys(artistEventsObj).forEach(artistKey => {
-    if (typeof artistEventsObj[artistKey].events === 'undefined') {
-      artistEventsObj[artistKey].events = []
+  Object.keys(artistEventsObj).forEach((artistKey) => {
+    if (typeof artistEventsObj[artistKey].events === "undefined") {
+      artistEventsObj[artistKey].events = [];
     }
-  })
-}
+  });
+};

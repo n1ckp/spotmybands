@@ -1,31 +1,35 @@
-import * as React from 'react'
-import Button, { BUTTON_TYPES, DEFAULT_BUTTON_TYPE } from './Button'
+import * as React from "react";
+import Button, { BUTTON_TYPES, DEFAULT_BUTTON_TYPE } from "./Button";
 
-const DeleteIcon = require('@images/icons/delete.svg').default
+const DeleteIcon = require("@images/icons/delete.svg").default;
 
 export default {
-  title: 'Atoms/Button',
+  title: "Atoms/Button",
   component: Button,
   argTypes: {
-    onClick: { action: 'onClick' },
+    onClick: { action: "onClick" },
     type: {
       control: {
-        type: 'select',
+        type: "select",
         options: BUTTON_TYPES,
-      }
-    }
+      },
+    },
   },
-}
+};
 
-const Template = ({ text, ...args }) => <Button {...args}>{text}</Button>
+const Template = ({ text, ...args }) => <Button {...args}>{text}</Button>;
 
-export const Default = Template.bind({})
+export const Default = Template.bind({});
 Default.args = {
   type: DEFAULT_BUTTON_TYPE,
-  text: "Click Me"
-}
+  text: "Click Me",
+};
 
-export const WithIcon = (args) => <Button {...args}><DeleteIcon /></Button>
+export const WithIcon = (args) => (
+  <Button {...args}>
+    <DeleteIcon />
+  </Button>
+);
 WithIcon.args = {
-  type: '',
-}
+  type: "",
+};

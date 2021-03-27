@@ -1,4 +1,4 @@
-@import 'base-styles';
+@import "base-styles";
 
 .container {
   width: 50%;
@@ -26,7 +26,7 @@
     z-index: index($zIndex, infobox);
     .close {
       outline: none;
-      border:none;
+      border: none;
       -webkit-appearance: none;
       background: none;
       padding: 0;

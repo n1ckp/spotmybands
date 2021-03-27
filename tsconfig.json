@@ -12,8 +12,8 @@
       "@types/*": ["@types/*"],
       "@utils/*": ["src/client/js/utils/*"],
       "@images/*": ["src/client/images/*"],
-      "@components/*": ["src/client/js/components/*"],
-    },
+      "@components/*": ["src/client/js/components/*"]
+    }
   },
-  "include": ["src"],
+  "include": ["src"]
 }

@@ -14,12 +14,9 @@
       "@types/*": ["../@types/*"],
       "@utils/*": ["js/utils/*"],
       "@images/*": ["images/*"],
-      "@components/*": ["js/components/*"],
+      "@components/*": ["js/components/*"]
     },
-    "typeRoots": [
-      "../@types",
-      "../../node_modules/@types"
-    ]
+    "typeRoots": ["../@types", "../../node_modules/@types"]
   },
   "include": ["../@types/*"],
   "exclude": ["**/*.stories.tsx"]

@@ -1,17 +1,18 @@
-import * as React from 'react'
-import { render } from 'react-dom'
-import { GlobalStateProvider } from '@utils/globalState'
+import * as React from "react";
+import { render } from "react-dom";
+import { GlobalStateProvider } from "@utils/globalState";
 
-import SpotMyBandsApp from './components/SpotMyBandsApp'
+import SpotMyBandsApp from "./components/SpotMyBandsApp";
 
 const renderApp = () => {
-  render((
+  render(
     <GlobalStateProvider>
       <SpotMyBandsApp />
-    </GlobalStateProvider>
-  ), document.getElementById('app-root'))
-}
+    </GlobalStateProvider>,
+    document.getElementById("app-root")
+  );
+};
 
-renderApp()
+renderApp();
 
-if (module.hot) module.hot.accept(() => renderApp())
+if (module.hot) module.hot.accept(() => renderApp());

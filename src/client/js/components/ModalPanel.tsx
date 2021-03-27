@@ -1,25 +1,25 @@
-import * as React from 'react'
+import * as React from "react";
 
-const CloseIcon = require('@images/icons/close.svg').default
+const CloseIcon = require("@images/icons/close.svg").default;
 
-const styles = require('./ModalPanel.scss').default
+const styles = require("./ModalPanel.scss").default;
 
 type ModalPanelProps = {
-  open: boolean,
-  onClose: () => void,
-  children: React.ReactNode,
-}
+  open: boolean;
+  onClose: () => void;
+  children: React.ReactNode;
+};
 
 const ModalPanel: React.FC<ModalPanelProps> = (props) => {
-  const { open, children, onClose } = props
-  let classNames = []
+  const { open, children, onClose } = props;
+  let classNames = [];
 
   if (open) {
-    classNames.push(styles.open)
+    classNames.push(styles.open);
   }
 
   return (
-    <div id={styles.container} className={classNames.join(' ')}>
+    <div id={styles.container} className={classNames.join(" ")}>
       <div className={styles.bg} onClick={() => onClose()}></div>
       <div className={styles.inner}>
         <div className={styles.top}></div>
@@ -30,7 +30,7 @@ const ModalPanel: React.FC<ModalPanelProps> = (props) => {
         <div className={styles.bottom}></div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ModalPanel
+export default ModalPanel;

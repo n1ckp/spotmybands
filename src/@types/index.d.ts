@@ -1,10 +1,10 @@
 declare global {
   interface Window {
-    csrfToken: string,
+    csrfToken: string;
     appData: {
-      keys: { [key: string]: string },
-      accessToken: string,
-    }
+      keys: { [key: string]: string };
+      accessToken: string;
+    };
   }
 }
 
@@ -12,4 +12,4 @@ export type ArtistEventsType = {
   [key: string]: {
     events: Event[];
   };
-}
+};

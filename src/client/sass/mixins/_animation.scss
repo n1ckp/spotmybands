@@ -1,4 +1,4 @@
-@mixin base-transition($duration, $type:ease-in-out) {
+@mixin base-transition($duration, $type: ease-in-out) {
   -webkit-transition: $duration $type;
   -moz-transition: $duration $type;
   -o-transition: $duration $type;
@@ -19,7 +19,6 @@
     @content;
   }
 }
-
 
 @mixin set-animation($name, $duration, $type) {
   -webkit-animation: $name $duration ease $type;

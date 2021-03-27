@@ -4,8 +4,6 @@
 
 The place for quickly spotting events for the bands you listen to.
 
-
-
 Uses [Spotify](https://developer.spotify.com/) and [Songkick](https://www.songkick.com/developer) developer APIs.
 
 Express for backend, React for frontend.
@@ -51,7 +49,7 @@ And you're away 🚀
 
 1. Ensure you have a Heroku account and the Heroku CLI installed, then go to project root.
 2. `heroku login`
-2. `heroku create`
-3. `heroku buildpacks:set heroku/nodejs`
+3. `heroku create`
+4. `heroku buildpacks:set heroku/nodejs`
 5. `git push heroku master`
 6. `heroku open` to see your deployed dyno

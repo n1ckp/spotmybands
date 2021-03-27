@@ -1,4 +1,4 @@
-@import 'base-styles';
+@import "base-styles";
 
 #container {
   position: fixed;
@@ -17,7 +17,8 @@
     flex-direction: column;
     align-items: center;
     height: 100%;
-    .top, .bottom {
+    .top,
+    .bottom {
       min-height: 48px;
     }
     .main {

@@ -1,37 +1,47 @@
-import * as React from 'react'
-import ArtistRow from './ArtistRow'
-import { GlobalStateProvider } from '@utils/globalState'
+import * as React from "react";
+import ArtistRow from "./ArtistRow";
+import { GlobalStateProvider } from "@utils/globalState";
 
 export default {
-  title: 'Molecules/ArtistRow',
+  title: "Molecules/ArtistRow",
   component: ArtistRow,
   argTypes: {
-    addToUserList: { action: 'addToUserList' },
-    fetchArtistEvents: { action: 'fetchArtistEvents' },
-    toggleEvents: { action: 'toggleEvents' },
-    onRemoveArtist: { action: 'onRemoveArtist' },
+    addToUserList: { action: "addToUserList" },
+    fetchArtistEvents: { action: "fetchArtistEvents" },
+    toggleEvents: { action: "toggleEvents" },
+    onRemoveArtist: { action: "onRemoveArtist" },
   },
-}
+};
 
-const Template = (args) => <GlobalStateProvider><ArtistRow {...args} /></GlobalStateProvider>
+const Template = (args) => (
+  <GlobalStateProvider>
+    <ArtistRow {...args} />
+  </GlobalStateProvider>
+);
 
-export const OnUserList = Template.bind({})
+export const OnUserList = Template.bind({});
 OnUserList.args = {
   artist: {
-    id: '0L8ExT028jH3ddEcZwqJJ5',
-    name: 'Red Hot Chili Peppers',
-    logoURL: 'https://i.scdn.co/image/89bc3c14aa2b4f250033ffcf5f322b2a553d9331',
-    genres: ['alternative rock', 'funk metal', 'funk rock', 'permanent wave', 'rock'],
+    id: "0L8ExT028jH3ddEcZwqJJ5",
+    name: "Red Hot Chili Peppers",
+    logoURL: "https://i.scdn.co/image/89bc3c14aa2b4f250033ffcf5f322b2a553d9331",
+    genres: [
+      "alternative rock",
+      "funk metal",
+      "funk rock",
+      "permanent wave",
+      "rock",
+    ],
   },
   onUserList: true,
   eventsNotFetched: true,
   eventsHidden: false,
   noEvents: false,
   fetchingEvents: false,
-}
+};
 
-export const NotOnUserList = Template.bind({})
+export const NotOnUserList = Template.bind({});
 NotOnUserList.args = {
   ...OnUserList.args,
   onUserList: false,
-}
+};

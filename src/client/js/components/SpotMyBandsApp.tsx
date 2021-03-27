@@ -1,9 +1,9 @@
-import * as React from 'react'
+import * as React from "react";
 
-import NavigationMenu from '@components/NavigationMenu'
-import StreetMap from './StreetMap'
+import NavigationMenu from "@components/NavigationMenu";
+import StreetMap from "./StreetMap";
 
-const styles = require('./SpotMyBandsApp.scss').default
+const styles = require("./SpotMyBandsApp.scss").default;
 
 const SpotMyBandsApp = () => {
   return (
@@ -11,7 +11,7 @@ const SpotMyBandsApp = () => {
       <NavigationMenu />
       <StreetMap />
     </div>
-  )
-}
+  );
+};
 
-export default SpotMyBandsApp
+export default SpotMyBandsApp;
