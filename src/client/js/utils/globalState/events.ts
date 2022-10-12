@@ -1,6 +1,7 @@
 import { apiFetch } from "@utils/settings";
 import { save, load } from "@utils/storage";
 import { sanitiseArtistEvents } from "@utils/sanitise";
+import { actionSetError } from "./error";
 
 export const name = "events";
 
@@ -12,6 +13,7 @@ export const actions = {
   RECEIVED_ARTIST_EVENTS: "RECEIVED_ARTIST_EVENTS",
   TOGGLE_ARTIST_EVENTS: "TOGGLE_ARTIST_EVENTS",
   REMOVE_USER_ARTIST: "REMOVE_USER_ARTIST",
+  ERROR_FETCHING_EVENTS: "ERROR_FETCHING_EVENTS"
 };
 
 interface ActionData {
@@ -53,6 +55,13 @@ export function reducer(
     case actions.REMOVE_USER_ARTIST:
       delete updatedState[payload.artistID];
       break;
+    case actions.ERROR_FETCHING_EVENTS:
+      updatedState[payload.artistID] = {
+        loading: false,
+        hidden: false,
+        events: state[payload.artistID].events,
+      };
+      break;
   }
   save("userEvents", updatedState);
   return updatedState;
@@ -65,14 +74,25 @@ export const actionFetchArtistEvents = (dispatch, { artistName, artistID }) => {
   apiFetch(`/artist-events/?artistName=${encodeURI(artistName)}`)
     .then((response) => response.json())
     .then((data) => {
-      dispatch({
-        type: actions.RECEIVED_ARTIST_EVENTS,
-        payload: {
-          artistID,
-          artistEvents: data.artistEvents,
-        },
-      });
-    });
+      if (data.error) {
+        dispatch({
+          type: actions.ERROR_FETCHING_EVENTS,
+          payload: {
+            artistID,
+          }
+        })
+        actionSetError(dispatch, { message: data.error.message })
+      }
+      else {
+        dispatch({
+          type: actions.RECEIVED_ARTIST_EVENTS,
+          payload: {
+            artistID,
+            artistEvents: data.artistEvents,
+          },
+        });
+      }
+    })
 };
 
 export const actionToggleArtistEvents = (dispatch, { artistID, isHidden }) => {

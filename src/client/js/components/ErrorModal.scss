@@ -1,0 +1,22 @@
+@import "base-styles";
+
+#container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 100%;
+  .inner {
+    width: 400px;
+    h3 {
+      font-size: 24px;
+      font-weight: normal;
+      margin-bottom: 40px;
+    }
+    p {
+      b {
+        font-weight: 600;
+      }
+    }
+  }
+}

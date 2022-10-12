@@ -28,7 +28,12 @@ const router = async (req, res) => {
     res.sendStatus(404);
   }
   const eventsData = await fetchEvents(args);
-  const artistEventsData = eventsData.resultsPage.results.event;
+  const artistEventsData = eventsData.resultsPage?.results?.event;
+
+  if (eventsData.resultsPage.status === "error") {
+    res.status(500).json({ error: eventsData.resultsPage.error })
+    return
+  }
 
   const artistEvents = (artistEventsData || [])
     .map((event) => {

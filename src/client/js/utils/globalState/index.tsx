@@ -2,6 +2,7 @@ import * as React from "react";
 import * as eventsStoreModule from "./events";
 import * as spotifyStoreModule from "./spotify";
 import * as userArtistsStoreModule from "./userArtists";
+import * as errorStoreModule from "./error";
 
 interface StoreModule {
   name: string;
@@ -28,6 +29,7 @@ export const [INITIAL_STATE, STATE_MODULES] = combinedReducers([
   eventsStoreModule,
   spotifyStoreModule,
   userArtistsStoreModule,
+  errorStoreModule,
 ]);
 
 function reducer(state = {}, { type, payload }) {
